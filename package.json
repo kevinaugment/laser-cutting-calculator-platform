@@ -30,6 +30,14 @@
     "lighthouse:ci": "lhci autorun"
   },
   "dependencies": {
+    "@tiptap/extension-image": "^3.3.1",
+    "@tiptap/extension-link": "^3.3.1",
+    "@tiptap/extension-table": "^3.3.1",
+    "@tiptap/extension-table-cell": "^3.3.1",
+    "@tiptap/extension-table-header": "^3.3.1",
+    "@tiptap/extension-table-row": "^3.3.1",
+    "@tiptap/react": "^3.3.1",
+    "@tiptap/starter-kit": "^3.3.1",
     "chart.js": "^4.5.0",
     "date-fns": "^4.1.0",
     "framer-motion": "^12.23.12",
