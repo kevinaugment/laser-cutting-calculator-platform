@@ -1,0 +1,215 @@
+{
+  "navigation": {
+    "home": "Home",
+    "calculators": "Calculators",
+    "about": "About",
+    "help": "Help",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "actions": {
+    "calculate": "Calculate",
+    "reset": "Reset",
+    "clear": "Clear",
+    "export": "Export",
+    "download": "Download",
+    "copy": "Copy",
+    "share": "Share",
+    "save": "Save",
+    "load": "Load",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit",
+    "edit": "Edit",
+    "delete": "Delete",
+    "add": "Add",
+    "remove": "Remove"
+  },
+  "status": {
+    "loading": "Loading...",
+    "calculating": "Calculating...",
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Information",
+    "completed": "Completed",
+    "failed": "Failed",
+    "pending": "Pending",
+    "processing": "Processing"
+  },
+  "validation": {
+    "required": "This field is required",
+    "invalid": "Invalid input",
+    "min": "Value must be at least {{min}}",
+    "max": "Value must not exceed {{max}}",
+    "range": "Value must be between {{min}} and {{max}}",
+    "positive": "Value must be positive",
+    "integer": "Value must be a whole number",
+    "decimal": "Value must be a decimal number",
+    "email": "Please enter a valid email address",
+    "url": "Please enter a valid URL"
+  },
+  "units": {
+    "length": {
+      "mm": "mm",
+      "cm": "cm",
+      "m": "m",
+      "inch": "in",
+      "feet": "ft"
+    },
+    "power": {
+      "W": "W",
+      "kW": "kW",
+      "hp": "hp"
+    },
+    "speed": {
+      "mm_min": "mm/min",
+      "m_min": "m/min",
+      "ipm": "ipm"
+    },
+    "pressure": {
+      "bar": "bar",
+      "psi": "psi",
+      "kPa": "kPa"
+    },
+    "time": {
+      "seconds": "sec",
+      "minutes": "min",
+      "hours": "hr",
+      "days": "days"
+    },
+    "temperature": {
+      "celsius": "°C",
+      "fahrenheit": "°F",
+      "kelvin": "K"
+    },
+    "currency": {
+      "usd": "USD",
+      "eur": "EUR",
+      "jpy": "JPY"
+    }
+  },
+  "materials": {
+    "steel": "Carbon Steel",
+    "stainless_steel": "Stainless Steel",
+    "aluminum": "Aluminum",
+    "copper": "Copper",
+    "brass": "Brass",
+    "titanium": "Titanium",
+    "acrylic": "Acrylic",
+    "wood": "Wood",
+    "plastic": "Plastic"
+  },
+  "laser_types": {
+    "fiber": "Fiber Laser",
+    "co2": "CO2 Laser",
+    "nd_yag": "Nd:YAG Laser",
+    "disk": "Disk Laser",
+    "diode": "Diode Laser"
+  },
+  "gas_types": {
+    "oxygen": "Oxygen",
+    "nitrogen": "Nitrogen",
+    "air": "Compressed Air",
+    "argon": "Argon",
+    "helium": "Helium"
+  },
+  "quality_levels": {
+    "draft": "Draft Quality",
+    "standard": "Standard Quality",
+    "precision": "Precision Quality",
+    "ultra_precision": "Ultra Precision"
+  },
+  "export": {
+    "formats": {
+      "pdf": "PDF Document",
+      "excel": "Excel Spreadsheet",
+      "csv": "CSV File",
+      "json": "JSON Data"
+    },
+    "filename": "laser_cutting_calculation",
+    "success": "Export completed successfully",
+    "error": "Export failed. Please try again."
+  },
+  "errors": {
+    "network": "Network connection error. Please check your internet connection.",
+    "server": "Server error. Please try again later.",
+    "validation": "Please check your input values.",
+    "calculation": "Calculation error. Please verify your parameters.",
+    "export": "Export failed. Please try again.",
+    "import": "Import failed. Please check your file format.",
+    "permission": "Permission denied. Please check your access rights.",
+    "not_found": "Resource not found.",
+    "timeout": "Request timeout. Please try again.",
+    "unknown": "An unknown error occurred. Please try again."
+  },
+  "success": {
+    "calculation": "Calculation completed successfully",
+    "export": "Data exported successfully",
+    "import": "Data imported successfully",
+    "save": "Data saved successfully",
+    "copy": "Copied to clipboard",
+    "share": "Shared successfully"
+  },
+  "help": {
+    "tooltip": "Click for help",
+    "documentation": "View Documentation",
+    "examples": "View Examples",
+    "contact_support": "Contact Support",
+    "keyboard_shortcuts": "Keyboard Shortcuts",
+    "getting_started": "Getting Started"
+  },
+  "accessibility": {
+    "skip_to_content": "Skip to main content",
+    "close_dialog": "Close dialog",
+    "open_menu": "Open menu",
+    "close_menu": "Close menu",
+    "expand": "Expand",
+    "collapse": "Collapse",
+    "sort_ascending": "Sort ascending",
+    "sort_descending": "Sort descending",
+    "loading_content": "Loading content",
+    "error_message": "Error message",
+    "success_message": "Success message",
+    "warning_message": "Warning message"
+  },
+  "calculator": {
+    "categories": {
+      "core_engineering": "Core Engineering",
+      "quality_control": "Quality Control",
+      "process_optimization": "Process Optimization",
+      "advanced_analysis": "Advanced Analysis"
+    },
+    "badges": {
+      "standard": "Standard",
+      "ai_enhanced": "AI Enhanced",
+      "premium": "Premium",
+      "new": "New"
+    },
+    "form": {
+      "inputs": "Input Parameters",
+      "results": "Calculation Results",
+      "chart": "Visualization",
+      "export": "Export Options",
+      "help": "Help & Documentation"
+    },
+    "results": {
+      "summary": "Summary",
+      "details": "Detailed Results",
+      "recommendations": "Recommendations",
+      "warnings": "Warnings",
+      "notes": "Additional Notes"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 Laser Cutting Calculator Platform. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "support": "Support",
+    "version": "Version {{version}}"
+  }
+}

@@ -1,0 +1,253 @@
+{
+  "laser_parameter_optimizer": {
+    "title": "レーザーパラメータ最適化",
+    "description": "最大効率と品質のためのレーザー切断パラメータを最適化",
+    "inputs": {
+      "material_type": {
+        "label": "材料タイプ",
+        "placeholder": "材料を選択",
+        "help": "切断する材料を選択してください"
+      },
+      "thickness": {
+        "label": "材料厚さ",
+        "placeholder": "厚さを入力",
+        "help": "材料の厚さをミリメートルで入力"
+      },
+      "laser_type": {
+        "label": "レーザータイプ",
+        "placeholder": "レーザータイプを選択",
+        "help": "使用するレーザーシステムのタイプ"
+      },
+      "max_power": {
+        "label": "最大レーザー出力",
+        "placeholder": "最大出力を入力",
+        "help": "利用可能な最大レーザー出力（ワット）"
+      },
+      "quality_requirement": {
+        "label": "品質要件",
+        "placeholder": "品質レベルを選択",
+        "help": "必要な切断品質レベル"
+      }
+    },
+    "results": {
+      "optimal_power": "最適レーザー出力",
+      "cutting_speed": "推奨切断速度",
+      "gas_pressure": "最適ガス圧力",
+      "focus_position": "フォーカス位置",
+      "quality_prediction": "予測品質",
+      "efficiency": "切断効率",
+      "recommendations": "最適化推奨事項"
+    }
+  },
+  "cutting_time_estimator": {
+    "title": "切断時間推定器",
+    "description": "正確な生産計画のための切断時間を推定",
+    "inputs": {
+      "material_type": {
+        "label": "材料タイプ",
+        "help": "切断する材料"
+      },
+      "thickness": {
+        "label": "材料厚さ",
+        "help": "厚さ（ミリメートル）"
+      },
+      "cutting_length": {
+        "label": "総切断長さ",
+        "help": "すべての切断の総長さ（ミリメートル）"
+      },
+      "pierce_count": {
+        "label": "ピアス数",
+        "help": "必要なピアスポイントの総数"
+      },
+      "laser_power": {
+        "label": "レーザー出力",
+        "help": "レーザー出力設定（ワット）"
+      }
+    },
+    "results": {
+      "piercing_time": "ピアス時間",
+      "cutting_time": "切断時間",
+      "moving_time": "移動時間",
+      "total_time": "総処理時間",
+      "efficiency": "プロセス効率",
+      "time_breakdown": "時間内訳",
+      "recommendations": "時間最適化のヒント"
+    }
+  },
+  "material_selection_assistant": {
+    "title": "材料選択アシスタント",
+    "description": "アプリケーション要件に基づいて最適な材料を選択",
+    "inputs": {
+      "application": {
+        "label": "アプリケーションタイプ",
+        "help": "切断部品の用途"
+      },
+      "strength_requirement": {
+        "label": "強度要件",
+        "help": "必要な機械的強度"
+      },
+      "corrosion_resistance": {
+        "label": "耐食性",
+        "help": "必要な耐食性"
+      },
+      "budget": {
+        "label": "単価予算",
+        "help": "部品あたりの最大コスト（円）"
+      }
+    },
+    "results": {
+      "recommended_materials": "推奨材料",
+      "material_properties": "材料特性",
+      "cost_analysis": "コスト分析",
+      "cutting_parameters": "推奨切断パラメータ",
+      "pros_cons": "長所と短所"
+    }
+  },
+  "heat_affected_zone_calculator": {
+    "title": "熱影響部計算機",
+    "description": "熱制御のための熱影響部を計算・分析",
+    "inputs": {
+      "material_type": {
+        "label": "材料タイプ",
+        "help": "切断する材料"
+      },
+      "thickness": {
+        "label": "材料厚さ",
+        "help": "材料厚さ（ミリメートル）"
+      },
+      "laser_power": {
+        "label": "レーザー出力",
+        "help": "レーザー出力（ワット）"
+      },
+      "cutting_speed": {
+        "label": "切断速度",
+        "help": "切断速度（mm/分）"
+      }
+    },
+    "results": {
+      "haz_width": "HAZ幅",
+      "haz_depth": "HAZ深さ",
+      "temperature_profile": "温度プロファイル",
+      "cooling_rate": "冷却速度",
+      "microstructure_changes": "微細組織変化",
+      "control_recommendations": "HAZ制御推奨事項"
+    }
+  },
+  "beam_quality_calculator": {
+    "title": "ビーム品質計算機",
+    "description": "レーザービーム品質と光学性能を分析",
+    "inputs": {
+      "laser_type": {
+        "label": "レーザータイプ",
+        "help": "レーザーシステムのタイプ"
+      },
+      "wavelength": {
+        "label": "波長",
+        "help": "レーザー波長（ナノメートル）"
+      },
+      "power": {
+        "label": "レーザー出力",
+        "help": "レーザー出力（ワット）"
+      },
+      "beam_diameter": {
+        "label": "ビーム径",
+        "help": "ビーム径（ミリメートル）"
+      }
+    },
+    "results": {
+      "m2_factor": "M²ファクター",
+      "beam_parameter_product": "ビームパラメータ積",
+      "focus_spot_size": "フォーカススポットサイズ",
+      "power_density": "パワー密度",
+      "cutting_capability": "切断能力評価",
+      "beam_quality_rating": "ビーム品質評価"
+    }
+  },
+  "cutting_quality_predictor": {
+    "title": "切断品質予測器",
+    "description": "パラメータと材料特性に基づく切断品質の予測",
+    "results": {
+      "quality_grade": "予測品質グレード",
+      "edge_roughness": "エッジ粗さ",
+      "perpendicularity": "エッジ垂直度",
+      "dross_formation": "ドロス形成リスク",
+      "burn_marks": "焼け跡リスク",
+      "quality_improvements": "品質改善提案"
+    }
+  },
+  "edge_quality_predictor": {
+    "title": "エッジ品質予測器",
+    "description": "エッジ品質特性の分析と予測",
+    "results": {
+      "surface_roughness": "表面粗さ（Ra）",
+      "edge_angle": "エッジ角度偏差",
+      "striations": "縞模様",
+      "heat_tinting": "熱変色レベル",
+      "edge_quality_score": "総合エッジ品質スコア"
+    }
+  },
+  "warping_risk_calculator": {
+    "title": "反り変形リスク計算機",
+    "description": "熱変形と反りリスクを計算",
+    "results": {
+      "warping_risk": "反りリスクレベル",
+      "thermal_stress": "熱応力分布",
+      "distortion_prediction": "変形予測",
+      "prevention_strategies": "反り防止戦略",
+      "fixture_recommendations": "治具推奨事項"
+    }
+  },
+  "burn_mark_preventer": {
+    "title": "焼け跡防止器",
+    "description": "最適化された切断パラメータで焼け跡を防止",
+    "results": {
+      "burn_risk": "焼け跡リスク",
+      "parameter_adjustments": "パラメータ調整",
+      "gas_recommendations": "ガスタイプ推奨事項",
+      "speed_optimization": "速度最適化",
+      "prevention_tips": "焼け跡防止のヒント"
+    }
+  },
+  "dross_formation_calculator": {
+    "title": "ドロス形成計算機",
+    "description": "ドロス形成を計算し最小化",
+    "results": {
+      "dross_risk": "ドロス形成リスク",
+      "gas_flow_optimization": "ガス流量最適化",
+      "pressure_recommendations": "圧力推奨事項",
+      "nozzle_selection": "ノズル選択",
+      "cleanup_requirements": "後処理要件"
+    }
+  },
+  "common": {
+    "form_sections": {
+      "material_properties": "材料特性",
+      "laser_settings": "レーザー設定",
+      "cutting_parameters": "切断パラメータ",
+      "quality_requirements": "品質要件",
+      "optimization_goals": "最適化目標"
+    },
+    "result_sections": {
+      "primary_results": "主要結果",
+      "secondary_analysis": "二次分析",
+      "recommendations": "推奨事項",
+      "warnings": "警告と考慮事項",
+      "technical_notes": "技術的注記"
+    },
+    "help_topics": {
+      "parameter_selection": "パラメータ選択ガイド",
+      "material_properties": "材料特性リファレンス",
+      "quality_standards": "品質基準（ISO 9013）",
+      "troubleshooting": "トラブルシューティングガイド",
+      "best_practices": "ベストプラクティス"
+    },
+    "validation_messages": {
+      "thickness_range": "厚さは{{min}}mmから{{max}}mmの間である必要があります",
+      "power_range": "出力は{{min}}Wから{{max}}Wの間である必要があります",
+      "speed_range": "速度は{{min}}から{{max}} mm/分の間である必要があります",
+      "pressure_range": "圧力は{{min}}から{{max}} barの間である必要があります",
+      "invalid_combination": "選択された材料に対して無効なパラメータ組み合わせ",
+      "exceeds_capability": "パラメータが装置能力を超えています"
+    }
+  }
+}

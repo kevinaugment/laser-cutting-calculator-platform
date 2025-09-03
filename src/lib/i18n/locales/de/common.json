@@ -1,0 +1,201 @@
+{
+  "navigation": {
+    "home": "Startseite",
+    "calculators": "Rechner",
+    "about": "Über uns",
+    "help": "Hilfe",
+    "contact": "Kontakt",
+    "language": "Sprache"
+  },
+  "actions": {
+    "calculate": "Berechnen",
+    "reset": "Zurücksetzen",
+    "clear": "Löschen",
+    "export": "Exportieren",
+    "download": "Herunterladen",
+    "copy": "Kopieren",
+    "share": "Teilen",
+    "save": "Speichern",
+    "load": "Laden",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "close": "Schließen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "previous": "Vorherige",
+    "submit": "Senden",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "add": "Hinzufügen",
+    "remove": "Entfernen"
+  },
+  "status": {
+    "loading": "Wird geladen...",
+    "calculating": "Wird berechnet...",
+    "success": "Erfolgreich",
+    "error": "Fehler",
+    "warning": "Warnung",
+    "info": "Information",
+    "completed": "Abgeschlossen",
+    "failed": "Fehlgeschlagen",
+    "pending": "Ausstehend",
+    "processing": "Wird verarbeitet"
+  },
+  "validation": {
+    "required": "Dieses Feld ist erforderlich",
+    "invalid": "Ungültige Eingabe",
+    "min": "Wert muss mindestens {{min}} sein",
+    "max": "Wert darf {{max}} nicht überschreiten",
+    "range": "Wert muss zwischen {{min}} und {{max}} liegen",
+    "positive": "Wert muss positiv sein",
+    "integer": "Wert muss eine ganze Zahl sein",
+    "decimal": "Wert muss eine Dezimalzahl sein",
+    "email": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+    "url": "Bitte geben Sie eine gültige URL ein"
+  },
+  "units": {
+    "length": {
+      "mm": "mm",
+      "cm": "cm",
+      "m": "m",
+      "inch": "Zoll",
+      "feet": "Fuß"
+    },
+    "power": {
+      "W": "W",
+      "kW": "kW",
+      "hp": "PS"
+    },
+    "speed": {
+      "mm_min": "mm/Min",
+      "m_min": "m/Min",
+      "ipm": "Zoll/Min"
+    },
+    "pressure": {
+      "bar": "bar",
+      "psi": "psi",
+      "kPa": "kPa"
+    },
+    "time": {
+      "seconds": "Sek",
+      "minutes": "Min",
+      "hours": "Std",
+      "days": "Tage"
+    },
+    "temperature": {
+      "celsius": "°C",
+      "fahrenheit": "°F",
+      "kelvin": "K"
+    },
+    "currency": {
+      "usd": "USD",
+      "eur": "EUR",
+      "jpy": "JPY"
+    }
+  },
+  "materials": {
+    "steel": "Kohlenstoffstahl",
+    "stainless_steel": "Edelstahl",
+    "aluminum": "Aluminium",
+    "copper": "Kupfer",
+    "brass": "Messing",
+    "titanium": "Titan",
+    "acrylic": "Acryl",
+    "wood": "Holz",
+    "plastic": "Kunststoff"
+  },
+  "laser_types": {
+    "fiber": "Faserlaser",
+    "co2": "CO2-Laser",
+    "nd_yag": "Nd:YAG-Laser",
+    "disk": "Scheibenlaser",
+    "diode": "Diodenlaser"
+  },
+  "gas_types": {
+    "oxygen": "Sauerstoff",
+    "nitrogen": "Stickstoff",
+    "air": "Druckluft",
+    "argon": "Argon",
+    "helium": "Helium"
+  },
+  "quality_levels": {
+    "draft": "Entwurfsqualität",
+    "standard": "Standardqualität",
+    "precision": "Präzisionsqualität",
+    "ultra_precision": "Ultrapräzision"
+  },
+  "export": {
+    "formats": {
+      "pdf": "PDF-Dokument",
+      "excel": "Excel-Tabelle",
+      "csv": "CSV-Datei",
+      "json": "JSON-Daten"
+    },
+    "filename": "laserschnitt_berechnung",
+    "success": "Export erfolgreich abgeschlossen",
+    "error": "Export fehlgeschlagen. Bitte versuchen Sie es erneut."
+  },
+  "errors": {
+    "network": "Netzwerkverbindungsfehler. Bitte überprüfen Sie Ihre Internetverbindung.",
+    "server": "Serverfehler. Bitte versuchen Sie es später erneut.",
+    "validation": "Bitte überprüfen Sie Ihre Eingabewerte.",
+    "calculation": "Berechnungsfehler. Bitte überprüfen Sie Ihre Parameter.",
+    "export": "Export fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "import": "Import fehlgeschlagen. Bitte überprüfen Sie Ihr Dateiformat.",
+    "permission": "Zugriff verweigert. Bitte überprüfen Sie Ihre Zugriffsrechte.",
+    "not_found": "Ressource nicht gefunden.",
+    "timeout": "Anfrage-Timeout. Bitte versuchen Sie es erneut.",
+    "unknown": "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+  },
+  "success": {
+    "calculation": "Berechnung erfolgreich abgeschlossen",
+    "export": "Daten erfolgreich exportiert",
+    "import": "Daten erfolgreich importiert",
+    "save": "Daten erfolgreich gespeichert",
+    "copy": "In Zwischenablage kopiert",
+    "share": "Erfolgreich geteilt"
+  },
+  "help": {
+    "tooltip": "Für Hilfe klicken",
+    "documentation": "Dokumentation anzeigen",
+    "examples": "Beispiele anzeigen",
+    "contact_support": "Support kontaktieren",
+    "keyboard_shortcuts": "Tastenkürzel",
+    "getting_started": "Erste Schritte"
+  },
+  "calculator": {
+    "categories": {
+      "core_engineering": "Kerntechnik",
+      "quality_control": "Qualitätskontrolle",
+      "process_optimization": "Prozessoptimierung",
+      "advanced_analysis": "Erweiterte Analyse"
+    },
+    "badges": {
+      "standard": "Standard",
+      "ai_enhanced": "KI-Erweitert",
+      "premium": "Premium",
+      "new": "Neu"
+    },
+    "form": {
+      "inputs": "Eingabeparameter",
+      "results": "Berechnungsergebnisse",
+      "chart": "Visualisierung",
+      "export": "Exportoptionen",
+      "help": "Hilfe & Dokumentation"
+    },
+    "results": {
+      "summary": "Zusammenfassung",
+      "details": "Detaillierte Ergebnisse",
+      "recommendations": "Empfehlungen",
+      "warnings": "Warnungen",
+      "notes": "Zusätzliche Hinweise"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 Laserschnitt-Rechner-Plattform. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen",
+    "support": "Support",
+    "version": "Version {{version}}"
+  }
+}

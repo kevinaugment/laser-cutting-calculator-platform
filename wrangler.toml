@@ -1,0 +1,54 @@
+name = "laser-calc-app"
+compatibility_date = "2024-01-01"
+
+[env.production]
+name = "laser-calc-app"
+
+[env.staging]
+name = "laser-calc-app-staging"
+
+# Cloudflare Pages configuration
+pages_build_output_dir = "dist"
+account_id = "c94f5ebfe9fe77f87281ad8c7933dc8d"
+
+# Build configuration
+[build]
+command = "npm run build"
+cwd = ""
+
+# Environment variables
+[vars]
+NODE_ENV = "production"
+VITE_APP_NAME = "Laser Cutting Calculator Platform"
+VITE_APP_VERSION = "1.0.0"
+
+# Headers for security and performance
+[[headers]]
+for = "/*"
+[headers.values]
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+X-XSS-Protection = "1; mode=block"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+for = "/assets/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.js"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "*.css"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+# Redirects for SPA
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200

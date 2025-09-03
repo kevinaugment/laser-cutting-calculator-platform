@@ -1,0 +1,263 @@
+/* 统一间距系统 - Laser Cutting Calculator Platform */
+
+/* 基础间距变量 */
+:root {
+  /* 间距尺度 */
+  --spacing-xs: 0.25rem;    /* 4px */
+  --spacing-sm: 0.5rem;     /* 8px */
+  --spacing-md: 1rem;       /* 16px */
+  --spacing-lg: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;       /* 32px */
+  --spacing-2xl: 3rem;      /* 48px */
+  --spacing-3xl: 4rem;      /* 64px */
+  
+  /* 组件间距 */
+  --component-gap-xs: 0.5rem;   /* 8px */
+  --component-gap-sm: 1rem;     /* 16px */
+  --component-gap-md: 1.5rem;   /* 24px */
+  --component-gap-lg: 2rem;     /* 32px */
+  --component-gap-xl: 3rem;     /* 48px */
+  
+  /* 容器内边距 */
+  --container-padding-xs: 1rem;     /* 16px */
+  --container-padding-sm: 1.5rem;   /* 24px */
+  --container-padding-md: 2rem;     /* 32px */
+  --container-padding-lg: 3rem;     /* 48px */
+  
+  /* 卡片间距 */
+  --card-padding: 1.5rem;           /* 24px */
+  --card-gap: 1rem;                 /* 16px */
+  
+  /* 表单间距 */
+  --form-field-gap: 1rem;           /* 16px */
+  --form-section-gap: 2rem;         /* 32px */
+  --form-padding: 1.5rem;           /* 24px */
+  
+  /* 按钮间距 - 8px基础网格系统 */
+  --button-padding-x: 1rem;         /* 16px - default */
+  --button-padding-y: 0.5rem;       /* 8px - default */
+  --button-gap: 0.5rem;             /* 8px */
+
+  /* 按钮尺寸级别内边距 */
+  --button-padding-sm-x: 1rem;      /* 16px - sm尺寸水平内边距 */
+  --button-padding-sm-y: 0.25rem;   /* 4px - sm尺寸垂直内边距 */
+  --button-padding-default-x: 1rem; /* 16px - default尺寸水平内边距 */
+  --button-padding-default-y: 0.5rem; /* 8px - default尺寸垂直内边距 */
+  --button-padding-lg-x: 2rem;      /* 32px - lg尺寸水平内边距 */
+  --button-padding-lg-y: 0.5rem;    /* 8px - lg尺寸垂直内边距 */
+  
+  /* 导航间距 */
+  --nav-padding: 1rem;              /* 16px */
+  --nav-item-gap: 0.5rem;           /* 8px */
+  
+  /* 内容区域间距 */
+  --content-max-width: 1200px;
+  --content-padding: 2rem;          /* 32px */
+  --section-gap: 3rem;              /* 48px */
+}
+
+/* 响应式间距调整 - 移动端 (符合Tailwind sm断点) */
+@media (max-width: 640px) {
+  :root {
+    --container-padding-xs: 0.75rem;  /* 12px */
+    --container-padding-sm: 1rem;     /* 16px */
+    --container-padding-md: 1.5rem;   /* 24px */
+    --container-padding-lg: 2rem;     /* 32px */
+    
+    --card-padding: 1rem;             /* 16px */
+    --form-padding: 1rem;             /* 16px */
+    --content-padding: 1rem;          /* 16px */
+    --section-gap: 2rem;              /* 32px */
+  }
+}
+
+/* 通用间距工具类 */
+.spacing-xs { padding: var(--spacing-xs); margin: var(--spacing-xs); }
+.spacing-sm { padding: var(--spacing-sm); margin: var(--spacing-sm); }
+.spacing-md { padding: var(--spacing-md); margin: var(--spacing-md); }
+.spacing-lg { padding: var(--spacing-lg); margin: var(--spacing-lg); }
+.spacing-xl { padding: var(--spacing-xl); margin: var(--spacing-xl); }
+
+/* 内边距工具类 */
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+
+.px-xs { padding-left: var(--spacing-xs); padding-right: var(--spacing-xs); }
+.px-sm { padding-left: var(--spacing-sm); padding-right: var(--spacing-sm); }
+.px-md { padding-left: var(--spacing-md); padding-right: var(--spacing-md); }
+.px-lg { padding-left: var(--spacing-lg); padding-right: var(--spacing-lg); }
+.px-xl { padding-left: var(--spacing-xl); padding-right: var(--spacing-xl); }
+
+.py-xs { padding-top: var(--spacing-xs); padding-bottom: var(--spacing-xs); }
+.py-sm { padding-top: var(--spacing-sm); padding-bottom: var(--spacing-sm); }
+.py-md { padding-top: var(--spacing-md); padding-bottom: var(--spacing-md); }
+.py-lg { padding-top: var(--spacing-lg); padding-bottom: var(--spacing-lg); }
+.py-xl { padding-top: var(--spacing-xl); padding-bottom: var(--spacing-xl); }
+
+/* 外边距工具类 */
+.m-xs { margin: var(--spacing-xs); }
+.m-sm { margin: var(--spacing-sm); }
+.m-md { margin: var(--spacing-md); }
+.m-lg { margin: var(--spacing-lg); }
+.m-xl { margin: var(--spacing-xl); }
+
+.mx-xs { margin-left: var(--spacing-xs); margin-right: var(--spacing-xs); }
+.mx-sm { margin-left: var(--spacing-sm); margin-right: var(--spacing-sm); }
+.mx-md { margin-left: var(--spacing-md); margin-right: var(--spacing-md); }
+.mx-lg { margin-left: var(--spacing-lg); margin-right: var(--spacing-lg); }
+.mx-xl { margin-left: var(--spacing-xl); margin-right: var(--spacing-xl); }
+
+.my-xs { margin-top: var(--spacing-xs); margin-bottom: var(--spacing-xs); }
+.my-sm { margin-top: var(--spacing-sm); margin-bottom: var(--spacing-sm); }
+.my-md { margin-top: var(--spacing-md); margin-bottom: var(--spacing-md); }
+.my-lg { margin-top: var(--spacing-lg); margin-bottom: var(--spacing-lg); }
+.my-xl { margin-top: var(--spacing-xl); margin-bottom: var(--spacing-xl); }
+
+/* 间隙工具类 */
+.gap-xs { gap: var(--spacing-xs); }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+.gap-xl { gap: var(--spacing-xl); }
+
+/* 组件特定间距类 */
+.calculator-container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--content-padding);
+}
+
+.calculator-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--component-gap-lg);
+}
+
+@media (min-width: 1024px) {
+  .calculator-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+.calculator-card {
+  padding: var(--card-padding);
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: white;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.calculator-form {
+  padding: var(--form-padding);
+}
+
+.calculator-form-section {
+  margin-bottom: var(--form-section-gap);
+}
+
+.calculator-form-field {
+  margin-bottom: var(--form-field-gap);
+}
+
+.calculator-button-group {
+  display: flex;
+  gap: var(--button-gap);
+  align-items: center;
+}
+
+.calculator-results {
+  padding: var(--card-padding);
+}
+
+.calculator-results-section {
+  margin-bottom: var(--component-gap-md);
+}
+
+.calculator-tabs {
+  margin-bottom: var(--component-gap-md);
+}
+
+.calculator-tab-content {
+  padding: var(--component-gap-md) 0;
+}
+
+/* 导航间距 */
+.nav-container {
+  padding: var(--nav-padding);
+}
+
+.nav-item {
+  margin-right: var(--nav-item-gap);
+}
+
+.nav-dropdown {
+  padding: var(--spacing-sm);
+}
+
+/* 页面布局间距 */
+.page-header {
+  margin-bottom: var(--section-gap);
+  padding: var(--component-gap-lg) 0;
+}
+
+.page-content {
+  margin-bottom: var(--section-gap);
+}
+
+.page-footer {
+  margin-top: var(--section-gap);
+  padding: var(--component-gap-lg) 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 640px) {
+  .calculator-container {
+    padding: var(--container-padding-sm);
+  }
+  
+  .calculator-grid {
+    gap: var(--component-gap-md);
+  }
+  
+  .calculator-card {
+    padding: var(--container-padding-sm);
+  }
+  
+  .calculator-form {
+    padding: var(--container-padding-sm);
+  }
+  
+  .calculator-form-section {
+    margin-bottom: var(--component-gap-md);
+  }
+}
+
+/* 特殊布局类 */
+.compact-spacing {
+  --form-field-gap: 0.75rem;
+  --component-gap-md: 1rem;
+  --card-padding: 1rem;
+}
+
+.loose-spacing {
+  --form-field-gap: 1.5rem;
+  --component-gap-md: 2rem;
+  --card-padding: 2rem;
+}
+
+/* 动画和过渡 */
+.spacing-transition {
+  transition: padding 0.2s ease, margin 0.2s ease;
+}
+
+/* 调试工具类 */
+.debug-spacing * {
+  outline: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.debug-spacing *:hover {
+  outline: 2px solid rgba(255, 0, 0, 0.6);
+}

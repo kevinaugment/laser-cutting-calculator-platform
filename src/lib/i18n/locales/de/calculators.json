@@ -1,0 +1,253 @@
+{
+  "laser_parameter_optimizer": {
+    "title": "Laserparameter-Optimierer",
+    "description": "Optimieren Sie Laserschnittparameter für maximale Effizienz und Qualität",
+    "inputs": {
+      "material_type": {
+        "label": "Materialtyp",
+        "placeholder": "Material auswählen",
+        "help": "Wählen Sie das zu schneidende Material"
+      },
+      "thickness": {
+        "label": "Materialdicke",
+        "placeholder": "Dicke eingeben",
+        "help": "Dicke des Materials in Millimetern"
+      },
+      "laser_type": {
+        "label": "Lasertyp",
+        "placeholder": "Lasertyp auswählen",
+        "help": "Typ des verwendeten Lasersystems"
+      },
+      "max_power": {
+        "label": "Maximale Laserleistung",
+        "placeholder": "Max. Leistung eingeben",
+        "help": "Maximale verfügbare Laserleistung in Watt"
+      },
+      "quality_requirement": {
+        "label": "Qualitätsanforderung",
+        "placeholder": "Qualitätsstufe auswählen",
+        "help": "Erforderliche Schnittqualitätsstufe"
+      }
+    },
+    "results": {
+      "optimal_power": "Optimale Laserleistung",
+      "cutting_speed": "Empfohlene Schnittgeschwindigkeit",
+      "gas_pressure": "Optimaler Gasdruck",
+      "focus_position": "Fokusposition",
+      "quality_prediction": "Vorhergesagte Qualität",
+      "efficiency": "Schneideffizienz",
+      "recommendations": "Optimierungsempfehlungen"
+    }
+  },
+  "cutting_time_estimator": {
+    "title": "Schnittzeit-Schätzer",
+    "description": "Schätzen Sie die Schnittzeit für eine genaue Produktionsplanung",
+    "inputs": {
+      "material_type": {
+        "label": "Materialtyp",
+        "help": "Zu schneidendes Material"
+      },
+      "thickness": {
+        "label": "Materialdicke",
+        "help": "Dicke in Millimetern"
+      },
+      "cutting_length": {
+        "label": "Gesamte Schnittlänge",
+        "help": "Gesamtlänge aller Schnitte in Millimetern"
+      },
+      "pierce_count": {
+        "label": "Anzahl der Anstiche",
+        "help": "Gesamtanzahl der erforderlichen Anstichpunkte"
+      },
+      "laser_power": {
+        "label": "Laserleistung",
+        "help": "Laserleistungseinstellung in Watt"
+      }
+    },
+    "results": {
+      "piercing_time": "Anstichzeit",
+      "cutting_time": "Schnittzeit",
+      "moving_time": "Verfahrzeit",
+      "total_time": "Gesamte Bearbeitungszeit",
+      "efficiency": "Prozesseffizienz",
+      "time_breakdown": "Zeitaufschlüsselung",
+      "recommendations": "Zeitoptimierungstipps"
+    }
+  },
+  "material_selection_assistant": {
+    "title": "Materialauswahl-Assistent",
+    "description": "Wählen Sie optimale Materialien basierend auf Anwendungsanforderungen",
+    "inputs": {
+      "application": {
+        "label": "Anwendungstyp",
+        "help": "Beabsichtigte Verwendung der geschnittenen Teile"
+      },
+      "strength_requirement": {
+        "label": "Festigkeitsanforderung",
+        "help": "Erforderliche mechanische Festigkeit"
+      },
+      "corrosion_resistance": {
+        "label": "Korrosionsbeständigkeit",
+        "help": "Erforderliche Korrosionsbeständigkeit"
+      },
+      "budget": {
+        "label": "Budget pro Einheit",
+        "help": "Maximale Kosten pro Teil in EUR"
+      }
+    },
+    "results": {
+      "recommended_materials": "Empfohlene Materialien",
+      "material_properties": "Materialeigenschaften",
+      "cost_analysis": "Kostenanalyse",
+      "cutting_parameters": "Vorgeschlagene Schnittparameter",
+      "pros_cons": "Vor- und Nachteile"
+    }
+  },
+  "heat_affected_zone_calculator": {
+    "title": "Wärmeeinflusszone-Rechner",
+    "description": "Berechnen und analysieren Sie die Wärmeeinflusszone für thermische Kontrolle",
+    "inputs": {
+      "material_type": {
+        "label": "Materialtyp",
+        "help": "Zu schneidendes Material"
+      },
+      "thickness": {
+        "label": "Materialdicke",
+        "help": "Materialdicke in Millimetern"
+      },
+      "laser_power": {
+        "label": "Laserleistung",
+        "help": "Laserleistung in Watt"
+      },
+      "cutting_speed": {
+        "label": "Schnittgeschwindigkeit",
+        "help": "Schnittgeschwindigkeit in mm/min"
+      }
+    },
+    "results": {
+      "haz_width": "WEZ-Breite",
+      "haz_depth": "WEZ-Tiefe",
+      "temperature_profile": "Temperaturprofil",
+      "cooling_rate": "Abkühlungsrate",
+      "microstructure_changes": "Gefügeänderungen",
+      "control_recommendations": "WEZ-Kontrollempfehlungen"
+    }
+  },
+  "beam_quality_calculator": {
+    "title": "Strahlqualitäts-Rechner",
+    "description": "Analysieren Sie Laserstrahlqualität und optische Leistung",
+    "inputs": {
+      "laser_type": {
+        "label": "Lasertyp",
+        "help": "Typ des Lasersystems"
+      },
+      "wavelength": {
+        "label": "Wellenlänge",
+        "help": "Laserwellenlänge in Nanometern"
+      },
+      "power": {
+        "label": "Laserleistung",
+        "help": "Laserleistung in Watt"
+      },
+      "beam_diameter": {
+        "label": "Strahldurchmesser",
+        "help": "Strahldurchmesser in Millimetern"
+      }
+    },
+    "results": {
+      "m2_factor": "M²-Faktor",
+      "beam_parameter_product": "Strahlparameterprodukt",
+      "focus_spot_size": "Fokusfleckgröße",
+      "power_density": "Leistungsdichte",
+      "cutting_capability": "Schneidfähigkeitsbewertung",
+      "beam_quality_rating": "Strahlqualitätsbewertung"
+    }
+  },
+  "cutting_quality_predictor": {
+    "title": "Schnittqualitäts-Vorhersage",
+    "description": "Vorhersage der Schnittqualität basierend auf Parametern und Materialeigenschaften",
+    "results": {
+      "quality_grade": "Vorhergesagte Qualitätsstufe",
+      "edge_roughness": "Kantenrauheit",
+      "perpendicularity": "Kantensenkrechte",
+      "dross_formation": "Gratbildungsrisiko",
+      "burn_marks": "Brandmarkenrisiko",
+      "quality_improvements": "Qualitätsverbesserungsvorschläge"
+    }
+  },
+  "edge_quality_predictor": {
+    "title": "Kantenqualitäts-Vorhersage",
+    "description": "Analysieren und vorhersagen von Kantenqualitätsmerkmalen",
+    "results": {
+      "surface_roughness": "Oberflächenrauheit (Ra)",
+      "edge_angle": "Kantenwinkelabweichung",
+      "striations": "Riffelungsmuster",
+      "heat_tinting": "Wärmeanlaufgrad",
+      "edge_quality_score": "Gesamte Kantenqualitätsbewertung"
+    }
+  },
+  "warping_risk_calculator": {
+    "title": "Verzugsrisiko-Rechner",
+    "description": "Berechnen Sie thermische Verformung und Verzugsrisiko",
+    "results": {
+      "warping_risk": "Verzugsrisikostufe",
+      "thermal_stress": "Thermische Spannungsverteilung",
+      "distortion_prediction": "Verformungsvorhersage",
+      "prevention_strategies": "Verzugspräventionsstrategien",
+      "fixture_recommendations": "Spannvorrichtungsempfehlungen"
+    }
+  },
+  "burn_mark_preventer": {
+    "title": "Brandmarken-Verhinderer",
+    "description": "Verhindern Sie Brandmarken mit optimierten Schnittparametern",
+    "results": {
+      "burn_risk": "Brandmarkenrisiko",
+      "parameter_adjustments": "Parameteranpassungen",
+      "gas_recommendations": "Gastypempfehlungen",
+      "speed_optimization": "Geschwindigkeitsoptimierung",
+      "prevention_tips": "Brandmarkenpräventions-Tipps"
+    }
+  },
+  "dross_formation_calculator": {
+    "title": "Gratbildungs-Rechner",
+    "description": "Berechnen und minimieren Sie die Gratbildung",
+    "results": {
+      "dross_risk": "Gratbildungsrisiko",
+      "gas_flow_optimization": "Gasflussoptimierung",
+      "pressure_recommendations": "Druckempfehlungen",
+      "nozzle_selection": "Düsenauswahl",
+      "cleanup_requirements": "Nachbearbeitungsanforderungen"
+    }
+  },
+  "common": {
+    "form_sections": {
+      "material_properties": "Materialeigenschaften",
+      "laser_settings": "Lasereinstellungen",
+      "cutting_parameters": "Schnittparameter",
+      "quality_requirements": "Qualitätsanforderungen",
+      "optimization_goals": "Optimierungsziele"
+    },
+    "result_sections": {
+      "primary_results": "Hauptergebnisse",
+      "secondary_analysis": "Sekundäranalyse",
+      "recommendations": "Empfehlungen",
+      "warnings": "Warnungen & Überlegungen",
+      "technical_notes": "Technische Hinweise"
+    },
+    "help_topics": {
+      "parameter_selection": "Parameterauswahl-Leitfaden",
+      "material_properties": "Materialeigenschaften-Referenz",
+      "quality_standards": "Qualitätsstandards (ISO 9013)",
+      "troubleshooting": "Fehlerbehebungs-Leitfaden",
+      "best_practices": "Bewährte Praktiken"
+    },
+    "validation_messages": {
+      "thickness_range": "Dicke muss zwischen {{min}}mm und {{max}}mm liegen",
+      "power_range": "Leistung muss zwischen {{min}}W und {{max}}W liegen",
+      "speed_range": "Geschwindigkeit muss zwischen {{min}} und {{max}} mm/min liegen",
+      "pressure_range": "Druck muss zwischen {{min}} und {{max}} bar liegen",
+      "invalid_combination": "Ungültige Parameterkombination für ausgewähltes Material",
+      "exceeds_capability": "Parameter überschreiten Geräteleistung"
+    }
+  }
+}

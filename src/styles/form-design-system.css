@@ -1,0 +1,287 @@
+/**
+ * 表单组件设计系统 - Form Design System
+ * 基于8px网格系统和WCAG 2.1 AA标准的表单组件设计token
+ * 支持浅色和深色模式，与现有颜色系统完全兼容
+ */
+
+:root {
+  /* ===== 表单组件颜色系统 - 浅色模式 ===== */
+  
+  /* 基础输入框颜色 */
+  --form-input-bg: #ffffff;                    /* 背景色 */
+  --form-input-bg-disabled: #f9fafb;          /* 禁用背景色 gray-50 */
+  --form-input-text: #111827;                 /* 文字颜色 gray-900 */
+  --form-input-text-disabled: #6b7280;        /* 禁用文字颜色 gray-500 */
+  --form-input-placeholder: #9ca3af;          /* 占位符颜色 gray-400 */
+  
+  /* 边框颜色 */
+  --form-input-border: #d1d5db;               /* 正常边框 gray-300 */
+  --form-input-border-hover: #9ca3af;         /* 悬停边框 gray-400 */
+  --form-input-border-focus: #3b82f6;         /* 焦点边框 blue-500 */
+  --form-input-border-disabled: #e5e7eb;      /* 禁用边框 gray-200 */
+  
+  /* 状态颜色 */
+  --form-input-border-error: #ef4444;         /* 错误边框 red-500 */
+  --form-input-text-error: #dc2626;           /* 错误文字 red-600 */
+  --form-input-bg-error: #fef2f2;             /* 错误背景 red-50 */
+  
+  --form-input-border-warning: #f59e0b;       /* 警告边框 amber-500 */
+  --form-input-text-warning: #d97706;         /* 警告文字 amber-600 */
+  --form-input-bg-warning: #fffbeb;           /* 警告背景 amber-50 */
+  
+  --form-input-border-success: #10b981;       /* 成功边框 emerald-500 */
+  --form-input-text-success: #059669;         /* 成功文字 emerald-600 */
+  --form-input-bg-success: #ecfdf5;           /* 成功背景 emerald-50 */
+  
+  /* 焦点环颜色 */
+  --form-focus-ring-color: #3b82f6;           /* 焦点环颜色 blue-500 */
+  --form-focus-ring-width: 2px;               /* 焦点环宽度 */
+  --form-focus-ring-offset: 0px;              /* 焦点环偏移 */
+  --form-focus-ring-opacity: 0.2;             /* 焦点环透明度 */
+  
+  /* ===== 表单组件尺寸系统 - 基于8px网格 ===== */
+  
+  /* 输入框高度 - 符合44px触摸标准 */
+  --form-input-height-sm: 2.5rem;             /* 40px - h-10 */
+  --form-input-height-default: 2.75rem;       /* 44px - h-11 */
+  --form-input-height-lg: 3rem;               /* 48px - h-12 */
+  
+  /* 输入框内边距 */
+  --form-input-padding-x-sm: 0.75rem;         /* 12px - px-3 */
+  --form-input-padding-y-sm: 0.5rem;          /* 8px - py-2 */
+  --form-input-padding-x-default: 0.75rem;    /* 12px - px-3 */
+  --form-input-padding-y-default: 0.5rem;     /* 8px - py-2 */
+  --form-input-padding-x-lg: 1rem;            /* 16px - px-4 */
+  --form-input-padding-y-lg: 0.75rem;         /* 12px - py-3 */
+  
+  /* 选择框特殊内边距 */
+  --form-select-padding-right: 2.5rem;        /* 40px - pr-10 为下拉箭头留空间 */
+  
+  /* ===== 表单组件视觉效果系统 ===== */
+  
+  /* 圆角 */
+  --form-border-radius: 0.5rem;               /* 8px - rounded-lg */
+  --form-border-radius-sm: 0.375rem;          /* 6px - rounded-md */
+  
+  /* 边框宽度 */
+  --form-border-width: 1px;
+  
+  /* 字体 */
+  --form-font-size: 0.875rem;                 /* 14px - text-sm */
+  --form-font-weight: 400;                    /* font-normal */
+  --form-line-height: 1.25rem;                /* 20px */
+  
+  /* 过渡动画 */
+  --form-transition: all 0.2s ease-in-out;
+  
+  /* 阴影 */
+  --form-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --form-shadow-focus: 0 0 0 var(--form-focus-ring-width) rgba(59, 130, 246, var(--form-focus-ring-opacity));
+  
+  /* 标签样式 */
+  --form-label-color: #374151;                /* gray-700 */
+  --form-label-font-size: 0.875rem;           /* 14px - text-sm */
+  --form-label-font-weight: 500;              /* font-medium */
+  --form-label-margin-bottom: 0.25rem;        /* 4px - mb-1 */
+  
+  /* 帮助文本样式 */
+  --form-helper-color: #6b7280;               /* gray-500 */
+  --form-helper-font-size: 0.75rem;           /* 12px - text-xs */
+  --form-helper-margin-top: 0.25rem;          /* 4px - mt-1 */
+  
+  /* 错误消息样式 */
+  --form-error-color: #dc2626;                /* red-600 */
+  --form-error-font-size: 0.75rem;            /* 12px - text-xs */
+  --form-error-margin-top: 0.25rem;           /* 4px - mt-1 */
+}
+
+/* ===== 深色模式适配 ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* 输入框颜色 - 深色模式 */
+    --form-input-bg: #1f2937;                 /* gray-800 */
+    --form-input-bg-disabled: #111827;        /* gray-900 */
+    --form-input-text: #f9fafb;               /* gray-50 */
+    --form-input-text-disabled: #6b7280;      /* gray-500 */
+    --form-input-placeholder: #9ca3af;        /* gray-400 */
+    
+    /* 边框颜色 - 深色模式 */
+    --form-input-border: #4b5563;             /* gray-600 */
+    --form-input-border-hover: #6b7280;       /* gray-500 */
+    --form-input-border-focus: #60a5fa;       /* blue-400 */
+    --form-input-border-disabled: #374151;    /* gray-700 */
+    
+    /* 状态颜色 - 深色模式 */
+    --form-input-border-error: #f87171;       /* red-400 */
+    --form-input-text-error: #fca5a5;         /* red-300 */
+    --form-input-bg-error: #7f1d1d;           /* red-900 */
+    
+    --form-input-border-warning: #fbbf24;     /* amber-400 */
+    --form-input-text-warning: #fcd34d;       /* amber-300 */
+    --form-input-bg-warning: #78350f;         /* amber-900 */
+    
+    --form-input-border-success: #34d399;     /* emerald-400 */
+    --form-input-text-success: #6ee7b7;       /* emerald-300 */
+    --form-input-bg-success: #064e3b;         /* emerald-900 */
+    
+    /* 焦点环 - 深色模式 */
+    --form-focus-ring-color: #60a5fa;         /* blue-400 */
+    
+    /* 标签和文本 - 深色模式 */
+    --form-label-color: #d1d5db;              /* gray-300 */
+    --form-helper-color: #9ca3af;             /* gray-400 */
+    --form-error-color: #fca5a5;              /* red-300 */
+  }
+}
+
+/* ===== 响应式调整 ===== */
+@media (max-width: 640px) {
+  :root {
+    /* 移动端输入框尺寸微调 */
+    --form-input-padding-x-sm: 0.75rem;       /* 12px - 保持触摸友好 */
+    --form-input-padding-x-default: 0.75rem;  /* 12px - 保持触摸友好 */
+    --form-input-padding-x-lg: 1rem;          /* 16px - 保持触摸友好 */
+    
+    /* 移动端字体微调 */
+    --form-font-size: 1rem;                   /* 16px - 防止iOS缩放 */
+  }
+}
+
+/* ===== 工具类 - 基于CSS变量的表单样式 ===== */
+.form-input-base {
+  display: block;
+  width: 100%;
+  background-color: var(--form-input-bg);
+  color: var(--form-input-text);
+  border: var(--form-border-width) solid var(--form-input-border);
+  border-radius: var(--form-border-radius);
+  font-size: var(--form-font-size);
+  font-weight: var(--form-font-weight);
+  line-height: var(--form-line-height);
+  transition: var(--form-transition);
+  box-shadow: var(--form-shadow);
+}
+
+.form-input-base::placeholder {
+  color: var(--form-input-placeholder);
+}
+
+.form-input-base:hover:not(:disabled) {
+  border-color: var(--form-input-border-hover);
+}
+
+.form-input-base:focus {
+  outline: none;
+  border-color: var(--form-input-border-focus);
+  box-shadow: var(--form-shadow-focus);
+}
+
+.form-input-base:disabled {
+  background-color: var(--form-input-bg-disabled);
+  color: var(--form-input-text-disabled);
+  border-color: var(--form-input-border-disabled);
+  cursor: not-allowed;
+}
+
+/* 输入框尺寸样式 */
+.form-input-sm {
+  height: var(--form-input-height-sm);
+  padding-left: var(--form-input-padding-x-sm);
+  padding-right: var(--form-input-padding-x-sm);
+  padding-top: var(--form-input-padding-y-sm);
+  padding-bottom: var(--form-input-padding-y-sm);
+  border-radius: var(--form-border-radius-sm);
+}
+
+.form-input-default {
+  height: var(--form-input-height-default);
+  padding-left: var(--form-input-padding-x-default);
+  padding-right: var(--form-input-padding-x-default);
+  padding-top: var(--form-input-padding-y-default);
+  padding-bottom: var(--form-input-padding-y-default);
+}
+
+.form-input-lg {
+  height: var(--form-input-height-lg);
+  padding-left: var(--form-input-padding-x-lg);
+  padding-right: var(--form-input-padding-x-lg);
+  padding-top: var(--form-input-padding-y-lg);
+  padding-bottom: var(--form-input-padding-y-lg);
+}
+
+/* 选择框样式 */
+.form-select-base {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: var(--form-select-padding-right);
+}
+
+/* 状态样式 */
+.form-input-error {
+  border-color: var(--form-input-border-error);
+  background-color: var(--form-input-bg-error);
+}
+
+.form-input-error:focus {
+  border-color: var(--form-input-border-error);
+  box-shadow: 0 0 0 var(--form-focus-ring-width) rgba(239, 68, 68, var(--form-focus-ring-opacity));
+}
+
+.form-input-warning {
+  border-color: var(--form-input-border-warning);
+  background-color: var(--form-input-bg-warning);
+}
+
+.form-input-warning:focus {
+  border-color: var(--form-input-border-warning);
+  box-shadow: 0 0 0 var(--form-focus-ring-width) rgba(245, 158, 11, var(--form-focus-ring-opacity));
+}
+
+.form-input-success {
+  border-color: var(--form-input-border-success);
+  background-color: var(--form-input-bg-success);
+}
+
+.form-input-success:focus {
+  border-color: var(--form-input-border-success);
+  box-shadow: 0 0 0 var(--form-focus-ring-width) rgba(16, 185, 129, var(--form-focus-ring-opacity));
+}
+
+/* 标签样式 */
+.form-label {
+  display: block;
+  color: var(--form-label-color);
+  font-size: var(--form-label-font-size);
+  font-weight: var(--form-label-font-weight);
+  margin-bottom: var(--form-label-margin-bottom);
+}
+
+/* 帮助文本样式 */
+.form-helper-text {
+  color: var(--form-helper-color);
+  font-size: var(--form-helper-font-size);
+  margin-top: var(--form-helper-margin-top);
+}
+
+/* 错误消息样式 */
+.form-error-text {
+  color: var(--form-error-color);
+  font-size: var(--form-error-font-size);
+  margin-top: var(--form-error-margin-top);
+}
+
+/* 组合样式示例 */
+.form-input-default-normal {
+  @apply form-input-base form-input-default;
+}
+
+.form-input-default-error {
+  @apply form-input-base form-input-default form-input-error;
+}
+
+.form-select-default {
+  @apply form-input-base form-input-default form-select-base;
+}

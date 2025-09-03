@@ -1,0 +1,253 @@
+{
+  "laser_parameter_optimizer": {
+    "title": "Laser Parameter Optimizer",
+    "description": "Optimize laser cutting parameters for maximum efficiency and quality",
+    "inputs": {
+      "material_type": {
+        "label": "Material Type",
+        "placeholder": "Select material",
+        "help": "Choose the material you want to cut"
+      },
+      "thickness": {
+        "label": "Material Thickness",
+        "placeholder": "Enter thickness",
+        "help": "Thickness of the material in millimeters"
+      },
+      "laser_type": {
+        "label": "Laser Type",
+        "placeholder": "Select laser type",
+        "help": "Type of laser system you are using"
+      },
+      "max_power": {
+        "label": "Maximum Laser Power",
+        "placeholder": "Enter max power",
+        "help": "Maximum available laser power in watts"
+      },
+      "quality_requirement": {
+        "label": "Quality Requirement",
+        "placeholder": "Select quality level",
+        "help": "Required cutting quality level"
+      }
+    },
+    "results": {
+      "optimal_power": "Optimal Laser Power",
+      "cutting_speed": "Recommended Cutting Speed",
+      "gas_pressure": "Optimal Gas Pressure",
+      "focus_position": "Focus Position",
+      "quality_prediction": "Predicted Quality",
+      "efficiency": "Cutting Efficiency",
+      "recommendations": "Optimization Recommendations"
+    }
+  },
+  "cutting_time_estimator": {
+    "title": "Cutting Time Estimator",
+    "description": "Estimate cutting time for accurate production planning",
+    "inputs": {
+      "material_type": {
+        "label": "Material Type",
+        "help": "Material to be cut"
+      },
+      "thickness": {
+        "label": "Material Thickness",
+        "help": "Thickness in millimeters"
+      },
+      "cutting_length": {
+        "label": "Total Cutting Length",
+        "help": "Total length of all cuts in millimeters"
+      },
+      "pierce_count": {
+        "label": "Number of Pierces",
+        "help": "Total number of pierce points required"
+      },
+      "laser_power": {
+        "label": "Laser Power",
+        "help": "Laser power setting in watts"
+      }
+    },
+    "results": {
+      "piercing_time": "Piercing Time",
+      "cutting_time": "Cutting Time",
+      "moving_time": "Moving Time",
+      "total_time": "Total Processing Time",
+      "efficiency": "Process Efficiency",
+      "time_breakdown": "Time Breakdown",
+      "recommendations": "Time Optimization Tips"
+    }
+  },
+  "material_selection_assistant": {
+    "title": "Material Selection Assistant",
+    "description": "Select optimal materials based on application requirements",
+    "inputs": {
+      "application": {
+        "label": "Application Type",
+        "help": "Intended use of the cut parts"
+      },
+      "strength_requirement": {
+        "label": "Strength Requirement",
+        "help": "Required mechanical strength"
+      },
+      "corrosion_resistance": {
+        "label": "Corrosion Resistance",
+        "help": "Required resistance to corrosion"
+      },
+      "budget": {
+        "label": "Budget per Unit",
+        "help": "Maximum cost per part in USD"
+      }
+    },
+    "results": {
+      "recommended_materials": "Recommended Materials",
+      "material_properties": "Material Properties",
+      "cost_analysis": "Cost Analysis",
+      "cutting_parameters": "Suggested Cutting Parameters",
+      "pros_cons": "Advantages & Disadvantages"
+    }
+  },
+  "heat_affected_zone_calculator": {
+    "title": "Heat Affected Zone Calculator",
+    "description": "Calculate and analyze heat affected zone for thermal control",
+    "inputs": {
+      "material_type": {
+        "label": "Material Type",
+        "help": "Material being cut"
+      },
+      "thickness": {
+        "label": "Material Thickness",
+        "help": "Material thickness in millimeters"
+      },
+      "laser_power": {
+        "label": "Laser Power",
+        "help": "Laser power in watts"
+      },
+      "cutting_speed": {
+        "label": "Cutting Speed",
+        "help": "Cutting speed in mm/min"
+      }
+    },
+    "results": {
+      "haz_width": "HAZ Width",
+      "haz_depth": "HAZ Depth",
+      "temperature_profile": "Temperature Profile",
+      "cooling_rate": "Cooling Rate",
+      "microstructure_changes": "Microstructure Changes",
+      "control_recommendations": "HAZ Control Recommendations"
+    }
+  },
+  "beam_quality_calculator": {
+    "title": "Beam Quality Calculator",
+    "description": "Analyze laser beam quality and optical performance",
+    "inputs": {
+      "laser_type": {
+        "label": "Laser Type",
+        "help": "Type of laser system"
+      },
+      "wavelength": {
+        "label": "Wavelength",
+        "help": "Laser wavelength in nanometers"
+      },
+      "power": {
+        "label": "Laser Power",
+        "help": "Laser power in watts"
+      },
+      "beam_diameter": {
+        "label": "Beam Diameter",
+        "help": "Beam diameter in millimeters"
+      }
+    },
+    "results": {
+      "m2_factor": "M² Factor",
+      "beam_parameter_product": "Beam Parameter Product",
+      "focus_spot_size": "Focus Spot Size",
+      "power_density": "Power Density",
+      "cutting_capability": "Cutting Capability Assessment",
+      "beam_quality_rating": "Beam Quality Rating"
+    }
+  },
+  "cutting_quality_predictor": {
+    "title": "Cutting Quality Predictor",
+    "description": "Predict cutting quality based on parameters and material properties",
+    "results": {
+      "quality_grade": "Predicted Quality Grade",
+      "edge_roughness": "Edge Roughness",
+      "perpendicularity": "Edge Perpendicularity",
+      "dross_formation": "Dross Formation Risk",
+      "burn_marks": "Burn Mark Risk",
+      "quality_improvements": "Quality Improvement Suggestions"
+    }
+  },
+  "edge_quality_predictor": {
+    "title": "Edge Quality Predictor",
+    "description": "Analyze and predict edge quality characteristics",
+    "results": {
+      "surface_roughness": "Surface Roughness (Ra)",
+      "edge_angle": "Edge Angle Deviation",
+      "striations": "Striation Pattern",
+      "heat_tinting": "Heat Tinting Level",
+      "edge_quality_score": "Overall Edge Quality Score"
+    }
+  },
+  "warping_risk_calculator": {
+    "title": "Warping Risk Calculator",
+    "description": "Calculate thermal distortion and warping risk",
+    "results": {
+      "warping_risk": "Warping Risk Level",
+      "thermal_stress": "Thermal Stress Distribution",
+      "distortion_prediction": "Distortion Prediction",
+      "prevention_strategies": "Warping Prevention Strategies",
+      "fixture_recommendations": "Fixturing Recommendations"
+    }
+  },
+  "burn_mark_preventer": {
+    "title": "Burn Mark Preventer",
+    "description": "Prevent burn marks with optimized cutting parameters",
+    "results": {
+      "burn_risk": "Burn Mark Risk",
+      "parameter_adjustments": "Parameter Adjustments",
+      "gas_recommendations": "Gas Type Recommendations",
+      "speed_optimization": "Speed Optimization",
+      "prevention_tips": "Burn Mark Prevention Tips"
+    }
+  },
+  "dross_formation_calculator": {
+    "title": "Dross Formation Calculator",
+    "description": "Calculate and minimize dross formation",
+    "results": {
+      "dross_risk": "Dross Formation Risk",
+      "gas_flow_optimization": "Gas Flow Optimization",
+      "pressure_recommendations": "Pressure Recommendations",
+      "nozzle_selection": "Nozzle Selection",
+      "cleanup_requirements": "Post-Processing Requirements"
+    }
+  },
+  "common": {
+    "form_sections": {
+      "material_properties": "Material Properties",
+      "laser_settings": "Laser Settings",
+      "cutting_parameters": "Cutting Parameters",
+      "quality_requirements": "Quality Requirements",
+      "optimization_goals": "Optimization Goals"
+    },
+    "result_sections": {
+      "primary_results": "Primary Results",
+      "secondary_analysis": "Secondary Analysis",
+      "recommendations": "Recommendations",
+      "warnings": "Warnings & Considerations",
+      "technical_notes": "Technical Notes"
+    },
+    "help_topics": {
+      "parameter_selection": "Parameter Selection Guide",
+      "material_properties": "Material Properties Reference",
+      "quality_standards": "Quality Standards (ISO 9013)",
+      "troubleshooting": "Troubleshooting Guide",
+      "best_practices": "Best Practices"
+    },
+    "validation_messages": {
+      "thickness_range": "Thickness must be between {{min}}mm and {{max}}mm",
+      "power_range": "Power must be between {{min}}W and {{max}}W",
+      "speed_range": "Speed must be between {{min}} and {{max}} mm/min",
+      "pressure_range": "Pressure must be between {{min}} and {{max}} bar",
+      "invalid_combination": "Invalid parameter combination for selected material",
+      "exceeds_capability": "Parameters exceed equipment capability"
+    }
+  }
+}

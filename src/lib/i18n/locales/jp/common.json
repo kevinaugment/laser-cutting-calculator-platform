@@ -1,0 +1,201 @@
+{
+  "navigation": {
+    "home": "ホーム",
+    "calculators": "計算機",
+    "about": "会社概要",
+    "help": "ヘルプ",
+    "contact": "お問い合わせ",
+    "language": "言語"
+  },
+  "actions": {
+    "calculate": "計算",
+    "reset": "リセット",
+    "clear": "クリア",
+    "export": "エクスポート",
+    "download": "ダウンロード",
+    "copy": "コピー",
+    "share": "共有",
+    "save": "保存",
+    "load": "読み込み",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "close": "閉じる",
+    "back": "戻る",
+    "next": "次へ",
+    "previous": "前へ",
+    "submit": "送信",
+    "edit": "編集",
+    "delete": "削除",
+    "add": "追加",
+    "remove": "削除"
+  },
+  "status": {
+    "loading": "読み込み中...",
+    "calculating": "計算中...",
+    "success": "成功",
+    "error": "エラー",
+    "warning": "警告",
+    "info": "情報",
+    "completed": "完了",
+    "failed": "失敗",
+    "pending": "保留中",
+    "processing": "処理中"
+  },
+  "validation": {
+    "required": "この項目は必須です",
+    "invalid": "無効な入力",
+    "min": "値は{{min}}以上である必要があります",
+    "max": "値は{{max}}以下である必要があります",
+    "range": "値は{{min}}から{{max}}の間である必要があります",
+    "positive": "値は正の数である必要があります",
+    "integer": "値は整数である必要があります",
+    "decimal": "値は小数である必要があります",
+    "email": "有効なメールアドレスを入力してください",
+    "url": "有効なURLを入力してください"
+  },
+  "units": {
+    "length": {
+      "mm": "mm",
+      "cm": "cm",
+      "m": "m",
+      "inch": "インチ",
+      "feet": "フィート"
+    },
+    "power": {
+      "W": "W",
+      "kW": "kW",
+      "hp": "馬力"
+    },
+    "speed": {
+      "mm_min": "mm/分",
+      "m_min": "m/分",
+      "ipm": "インチ/分"
+    },
+    "pressure": {
+      "bar": "bar",
+      "psi": "psi",
+      "kPa": "kPa"
+    },
+    "time": {
+      "seconds": "秒",
+      "minutes": "分",
+      "hours": "時間",
+      "days": "日"
+    },
+    "temperature": {
+      "celsius": "°C",
+      "fahrenheit": "°F",
+      "kelvin": "K"
+    },
+    "currency": {
+      "usd": "USD",
+      "eur": "EUR",
+      "jpy": "JPY"
+    }
+  },
+  "materials": {
+    "steel": "炭素鋼",
+    "stainless_steel": "ステンレス鋼",
+    "aluminum": "アルミニウム",
+    "copper": "銅",
+    "brass": "真鍮",
+    "titanium": "チタン",
+    "acrylic": "アクリル",
+    "wood": "木材",
+    "plastic": "プラスチック"
+  },
+  "laser_types": {
+    "fiber": "ファイバーレーザー",
+    "co2": "CO2レーザー",
+    "nd_yag": "Nd:YAGレーザー",
+    "disk": "ディスクレーザー",
+    "diode": "ダイオードレーザー"
+  },
+  "gas_types": {
+    "oxygen": "酸素",
+    "nitrogen": "窒素",
+    "air": "圧縮空気",
+    "argon": "アルゴン",
+    "helium": "ヘリウム"
+  },
+  "quality_levels": {
+    "draft": "ドラフト品質",
+    "standard": "標準品質",
+    "precision": "精密品質",
+    "ultra_precision": "超精密"
+  },
+  "export": {
+    "formats": {
+      "pdf": "PDFドキュメント",
+      "excel": "Excelスプレッドシート",
+      "csv": "CSVファイル",
+      "json": "JSONデータ"
+    },
+    "filename": "レーザー切断計算",
+    "success": "エクスポートが正常に完了しました",
+    "error": "エクスポートに失敗しました。再試行してください。"
+  },
+  "errors": {
+    "network": "ネットワーク接続エラー。インターネット接続を確認してください。",
+    "server": "サーバーエラー。後でもう一度お試しください。",
+    "validation": "入力値を確認してください。",
+    "calculation": "計算エラー。パラメータを確認してください。",
+    "export": "エクスポートに失敗しました。再試行してください。",
+    "import": "インポートに失敗しました。ファイル形式を確認してください。",
+    "permission": "アクセスが拒否されました。アクセス権限を確認してください。",
+    "not_found": "リソースが見つかりません。",
+    "timeout": "リクエストタイムアウト。再試行してください。",
+    "unknown": "不明なエラーが発生しました。再試行してください。"
+  },
+  "success": {
+    "calculation": "計算が正常に完了しました",
+    "export": "データが正常にエクスポートされました",
+    "import": "データが正常にインポートされました",
+    "save": "データが正常に保存されました",
+    "copy": "クリップボードにコピーしました",
+    "share": "正常に共有されました"
+  },
+  "help": {
+    "tooltip": "ヘルプをクリック",
+    "documentation": "ドキュメントを表示",
+    "examples": "例を表示",
+    "contact_support": "サポートに連絡",
+    "keyboard_shortcuts": "キーボードショートカット",
+    "getting_started": "はじめに"
+  },
+  "calculator": {
+    "categories": {
+      "core_engineering": "コアエンジニアリング",
+      "quality_control": "品質管理",
+      "process_optimization": "プロセス最適化",
+      "advanced_analysis": "高度な分析"
+    },
+    "badges": {
+      "standard": "標準",
+      "ai_enhanced": "AI強化",
+      "premium": "プレミアム",
+      "new": "新規"
+    },
+    "form": {
+      "inputs": "入力パラメータ",
+      "results": "計算結果",
+      "chart": "可視化",
+      "export": "エクスポートオプション",
+      "help": "ヘルプ＆ドキュメント"
+    },
+    "results": {
+      "summary": "概要",
+      "details": "詳細結果",
+      "recommendations": "推奨事項",
+      "warnings": "警告",
+      "notes": "追加注記"
+    }
+  },
+  "footer": {
+    "copyright": "© 2025 レーザー切断計算機プラットフォーム。全著作権所有。",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "support": "サポート",
+    "version": "バージョン {{version}}"
+  }
+}
