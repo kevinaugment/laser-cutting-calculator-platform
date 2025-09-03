@@ -11,6 +11,7 @@ import { UserPreferencesPanel } from './UserPreferencesPanel';
 import { HistoryStatsWidget } from './HistoryStatsWidget';
 import { PatternInsightsPanel } from './PatternInsightsPanel';
 import { PatternStatsWidget } from './PatternStatsWidget';
+import { RecommendationPanel } from './RecommendationPanel';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -18,10 +19,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -101,6 +102,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'AI-powered pattern insights and recommendations',
+    },
+    {
+      id: 'recommendations' as TabType,
+      label: 'Smart Suggestions',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      ),
+      description: 'ML-powered recommendations for parameter optimization',
     },
   ];
 
@@ -236,6 +247,17 @@ export function MemorySystemPanel({
                 showCategories={true}
                 showAnomalies={true}
                 maxInsights={20}
+                className="border-0 shadow-none"
+              />
+            </div>
+          )}
+
+          {activeTab === 'recommendations' && (
+            <div className="p-4">
+              <RecommendationPanel
+                calculatorType={calculatorType}
+                showTypes={['parameter-value', 'parameter-combination', 'optimization-suggestion', 'contextual-recommendation']}
+                maxRecommendations={15}
                 className="border-0 shadow-none"
               />
             </div>

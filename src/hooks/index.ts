@@ -35,6 +35,16 @@ export {
   usePatternInsights
 } from './usePatternRecognition';
 
+// Recommendation Hooks
+export {
+  useRecommendation,
+  useParameterValueRecommendations,
+  useParameterCombinationRecommendations,
+  useCalculatorWorkflowRecommendations,
+  useOptimizationSuggestions,
+  useContextualRecommendations
+} from './useRecommendation';
+
 // API Hooks
 export {
   // Base hooks

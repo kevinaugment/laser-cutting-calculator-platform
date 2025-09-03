@@ -10,6 +10,8 @@ export { ParameterPresetPanel } from './ParameterPresetPanel';
 export { MemorySystemPanel, MemoryQuickAccess } from './MemorySystemPanel';
 export { PatternInsightsPanel } from './PatternInsightsPanel';
 export { PatternStatsWidget } from './PatternStatsWidget';
+export { RecommendationPanel } from './RecommendationPanel';
+export { RecommendationWidget } from './RecommendationWidget';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -32,6 +34,8 @@ export type { ParameterPresetPanelProps } from './ParameterPresetPanel';
 export type { MemorySystemPanelProps, MemoryQuickAccessProps } from './MemorySystemPanel';
 export type { PatternInsightsPanelProps } from './PatternInsightsPanel';
 export type { PatternStatsWidgetProps } from './PatternStatsWidget';
+export type { RecommendationPanelProps } from './RecommendationPanel';
+export type { RecommendationWidgetProps } from './RecommendationWidget';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,
