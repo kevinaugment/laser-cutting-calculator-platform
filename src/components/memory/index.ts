@@ -6,6 +6,7 @@
 export { CalculationHistoryPanel } from './CalculationHistoryPanel';
 export { HistoryStatsWidget } from './HistoryStatsWidget';
 export { UserPreferencesPanel } from './UserPreferencesPanel';
+export { ParameterPresetPanel } from './ParameterPresetPanel';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -15,6 +16,7 @@ export {
 export type { CalculationHistoryPanelProps } from './CalculationHistoryPanel';
 export type { HistoryStatsWidgetProps } from './HistoryStatsWidget';
 export type { UserPreferencesPanelProps } from './UserPreferencesPanel';
+export type { ParameterPresetPanelProps } from './ParameterPresetPanel';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,
