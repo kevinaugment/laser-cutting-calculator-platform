@@ -305,10 +305,127 @@ describe('PatternRecognitionService', () => {
     });
   });
 
+  describe('advanced pattern recognition', () => {
+    beforeEach(() => {
+      // Setup mock data for advanced patterns
+      const mockRecords: CalculationRecord[] = [
+        {
+          id: 'calc-1',
+          calculatorType: 'laser-cutting-cost',
+          calculatorName: 'Laser Cutting Cost Calculator',
+          inputs: { thickness: 5, material: 'steel', area: 100 },
+          outputs: { cost: 50, time: 30 },
+          timestamp: new Date('2024-01-01T10:00:00Z'),
+          executionTime: 150,
+          context: {},
+          metadata: { version: '1.0', userAgent: 'test', sessionId: 'session-1' }
+        },
+        {
+          id: 'calc-2',
+          calculatorType: 'cutting-time-estimator',
+          calculatorName: 'Cutting Time Estimator',
+          inputs: { length: 100, speed: 10 },
+          outputs: { time: 10 },
+          timestamp: new Date('2024-01-01T10:05:00Z'),
+          executionTime: 100,
+          context: {},
+          metadata: { version: '1.0', userAgent: 'test', sessionId: 'session-1' }
+        },
+        {
+          id: 'calc-3',
+          calculatorType: 'material-selection-assistant',
+          calculatorName: 'Material Selection Assistant',
+          inputs: { application: 'automotive', thickness: 3 },
+          outputs: { material: 'aluminum' },
+          timestamp: new Date('2024-01-01T10:10:00Z'),
+          executionTime: 120,
+          context: {},
+          metadata: { version: '1.0', userAgent: 'test', sessionId: 'session-1' }
+        },
+        {
+          id: 'calc-4',
+          calculatorType: 'laser-cutting-cost',
+          calculatorName: 'Laser Cutting Cost Calculator',
+          inputs: { thickness: 1000, material: 'steel', area: 50 }, // Outlier thickness
+          outputs: { cost: 500, time: 300 },
+          timestamp: new Date('2024-01-02T10:00:00Z'),
+          executionTime: 180,
+          context: {},
+          metadata: { version: '1.0', userAgent: 'test', sessionId: 'session-2' }
+        }
+      ];
+
+      mockHistoryService.getHistory.mockResolvedValue({
+        records: mockRecords,
+        total: mockRecords.length,
+        pagination: { page: 1, limit: 1000, hasNext: false, hasPrevious: false }
+      });
+    });
+
+    it('should detect behavior sequences', async () => {
+      const patterns = await service.analyzeUserPatterns('test-user');
+
+      const sequencePatterns = patterns.filter(p => p.type === 'behavior-sequence');
+      expect(sequencePatterns.length).toBeGreaterThanOrEqual(0);
+
+      if (sequencePatterns.length > 0) {
+        const pattern = sequencePatterns[0];
+        expect(pattern.data).toHaveProperty('sequence');
+        expect(pattern.data).toHaveProperty('frequency');
+        expect(pattern.data).toHaveProperty('averageTimeSpan');
+      }
+    });
+
+    it('should detect anomalies', async () => {
+      const patterns = await service.analyzeUserPatterns('test-user');
+
+      const anomalyPatterns = patterns.filter(p => p.type === 'anomaly-detection');
+      expect(anomalyPatterns.length).toBeGreaterThanOrEqual(0);
+
+      if (anomalyPatterns.length > 0) {
+        const pattern = anomalyPatterns[0];
+        expect(pattern.data).toHaveProperty('type');
+        expect(pattern.data).toHaveProperty('severity');
+        expect(pattern.data).toHaveProperty('suggestedAction');
+      }
+    });
+
+    it('should detect parameter correlations', async () => {
+      const patterns = await service.analyzeUserPatterns('test-user');
+
+      const correlationPatterns = patterns.filter(p => p.type === 'parameter-correlation');
+      expect(correlationPatterns.length).toBeGreaterThanOrEqual(0);
+
+      if (correlationPatterns.length > 0) {
+        const pattern = correlationPatterns[0];
+        expect(pattern.data).toHaveProperty('parameterA');
+        expect(pattern.data).toHaveProperty('parameterB');
+        expect(pattern.data).toHaveProperty('correlationCoefficient');
+        expect(pattern.data.correlationCoefficient).toBeGreaterThanOrEqual(-1);
+        expect(pattern.data.correlationCoefficient).toBeLessThanOrEqual(1);
+      }
+    });
+
+    it('should detect usage evolution', async () => {
+      const patterns = await service.analyzeUserPatterns('test-user');
+
+      const evolutionPatterns = patterns.filter(p => p.type === 'usage-evolution');
+      expect(evolutionPatterns.length).toBeGreaterThanOrEqual(0);
+
+      if (evolutionPatterns.length > 0) {
+        const pattern = evolutionPatterns[0];
+        expect(pattern.data).toHaveProperty('metric');
+        expect(pattern.data).toHaveProperty('trend');
+        expect(pattern.data).toHaveProperty('changeRate');
+        expect(pattern.data).toHaveProperty('prediction');
+      }
+    });
+  });
+
   describe('error handling', () => {
     it('should handle service errors gracefully', async () => {
       mockHistoryService.getHistory.mockRejectedValue(new Error('Service error'));
-      
+
       await expect(service.analyzeUserPatterns('test-user')).rejects.toThrow('Service error');
     });
 

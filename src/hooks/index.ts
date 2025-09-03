@@ -28,6 +28,10 @@ export {
   useCalculatorUsagePatterns,
   useTimeActivityPatterns,
   useParameterCombinationPatterns,
+  useBehaviorSequencePatterns,
+  useAnomalyDetectionPatterns,
+  useParameterCorrelationPatterns,
+  useUsageEvolutionPatterns,
   usePatternInsights
 } from './usePatternRecognition';
 

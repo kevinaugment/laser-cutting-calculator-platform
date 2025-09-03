@@ -264,11 +264,104 @@ export function useParameterCombinationPatterns(userId?: string) {
 }
 
 /**
+ * Hook for behavior sequence patterns
+ */
+export function useBehaviorSequencePatterns(userId?: string) {
+  const [state, actions] = usePatternRecognition({ userId, autoAnalyze: true });
+
+  const sequencePatterns = state.patterns.filter(p => p.type === 'behavior-sequence');
+
+  const getSequencePatterns = useCallback(async () => {
+    return await actions.getPatternsByType('behavior-sequence', userId);
+  }, [actions, userId]);
+
+  return {
+    patterns: sequencePatterns,
+    loading: state.loading,
+    error: state.error,
+    getSequencePatterns,
+    refresh: () => actions.refreshPatterns(userId),
+  };
+}
+
+/**
+ * Hook for anomaly detection patterns
+ */
+export function useAnomalyDetectionPatterns(userId?: string) {
+  const [state, actions] = usePatternRecognition({ userId, autoAnalyze: true });
+
+  const anomalyPatterns = state.patterns.filter(p => p.type === 'anomaly-detection');
+
+  const getAnomalyPatterns = useCallback(async () => {
+    return await actions.getPatternsByType('anomaly-detection', userId);
+  }, [actions, userId]);
+
+  return {
+    patterns: anomalyPatterns,
+    anomalies: anomalyPatterns.filter(p => p.data.severity === 'high'),
+    warnings: anomalyPatterns.filter(p => p.data.severity === 'medium'),
+    loading: state.loading,
+    error: state.error,
+    getAnomalyPatterns,
+    refresh: () => actions.refreshPatterns(userId),
+  };
+}
+
+/**
+ * Hook for parameter correlation patterns
+ */
+export function useParameterCorrelationPatterns(userId?: string) {
+  const [state, actions] = usePatternRecognition({ userId, autoAnalyze: true });
+
+  const correlationPatterns = state.patterns.filter(p => p.type === 'parameter-correlation');
+
+  const getCorrelationPatterns = useCallback(async () => {
+    return await actions.getPatternsByType('parameter-correlation', userId);
+  }, [actions, userId]);
+
+  return {
+    patterns: correlationPatterns,
+    strongCorrelations: correlationPatterns.filter(p => Math.abs(p.data.correlationCoefficient) > 0.7),
+    loading: state.loading,
+    error: state.error,
+    getCorrelationPatterns,
+    refresh: () => actions.refreshPatterns(userId),
+  };
+}
+
+/**
+ * Hook for usage evolution patterns
+ */
+export function useUsageEvolutionPatterns(userId?: string) {
+  const [state, actions] = usePatternRecognition({ userId, autoAnalyze: true });
+
+  const evolutionPatterns = state.patterns.filter(p => p.type === 'usage-evolution');
+
+  const getEvolutionPatterns = useCallback(async () => {
+    return await actions.getPatternsByType('usage-evolution', userId);
+  }, [actions, userId]);
+
+  return {
+    patterns: evolutionPatterns,
+    trends: evolutionPatterns.map(p => ({
+      metric: p.data.metric,
+      trend: p.data.trend,
+      changeRate: p.data.changeRate,
+      prediction: p.data.prediction,
+    })),
+    loading: state.loading,
+    error: state.error,
+    getEvolutionPatterns,
+    refresh: () => actions.refreshPatterns(userId),
+  };
+}
+
+/**
  * Hook for pattern insights and recommendations
  */
 export function usePatternInsights(userId?: string) {
   const [state, actions] = usePatternRecognition({ userId, autoAnalyze: true });
-  
+
   // Generate insights from patterns
   const insights = state.patterns.map(pattern => ({
     id: pattern.id,
@@ -283,9 +376,19 @@ export function usePatternInsights(userId?: string) {
   const sortedInsights = insights
     .sort((a, b) => b.priority - a.priority || b.confidence - a.confidence);
 
+  // Categorize insights
+  const categorizedInsights = {
+    optimization: insights.filter(i => ['parameter-frequency', 'parameter-combination', 'parameter-correlation'].includes(i.type)),
+    workflow: insights.filter(i => ['behavior-sequence', 'time-activity', 'usage-evolution'].includes(i.type)),
+    quality: insights.filter(i => ['anomaly-detection'].includes(i.type)),
+    usage: insights.filter(i => ['calculator-usage'].includes(i.type)),
+  };
+
   return {
     insights: sortedInsights,
     topInsights: sortedInsights.slice(0, 5),
+    categorizedInsights,
+    anomalies: insights.filter(i => i.type === 'anomaly-detection'),
     loading: state.loading,
     error: state.error,
     refresh: () => actions.refreshPatterns(userId),
@@ -306,6 +409,14 @@ function generateRecommendation(pattern: PatternAnalysisResult): string {
       return `You're most active during ${pattern.data.timeSlot} - schedule complex calculations then`;
     case 'parameter-combination':
       return `This parameter combination works well - consider saving as a preset`;
+    case 'behavior-sequence':
+      return `You often use calculators in sequence: ${pattern.data.sequence.join(' → ')} - consider creating a workflow`;
+    case 'anomaly-detection':
+      return pattern.data.suggestedAction;
+    case 'parameter-correlation':
+      return `Parameters ${pattern.data.parameterA} and ${pattern.data.parameterB} are correlated - adjust them together`;
+    case 'usage-evolution':
+      return `Your usage is ${pattern.data.trend} - ${pattern.data.trend === 'increasing' ? 'consider upgrading your plan' : 'optimize your workflow'}`;
     default:
       return 'Pattern detected - consider optimizing your workflow';
   }
@@ -320,8 +431,17 @@ function calculatePriority(pattern: PatternAnalysisResult): number {
     'parameter-combination': 0.7,
     'behavior-sequence': 0.5,
     'anomaly-detection': 1.0,
+    'parameter-correlation': 0.6,
+    'usage-evolution': 0.4,
   };
 
   const typeWeight = typeWeights[pattern.type] || 0.5;
-  return pattern.confidence * typeWeight;
+
+  // Boost priority for high-severity anomalies
+  let severityBoost = 1.0;
+  if (pattern.type === 'anomaly-detection' && pattern.data.severity === 'high') {
+    severityBoost = 1.5;
+  }
+
+  return pattern.confidence * typeWeight * severityBoost;
 }
