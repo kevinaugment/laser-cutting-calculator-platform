@@ -70,6 +70,20 @@ export {
   useFeatureFlag
 } from './useABTesting';
 
+// Team Management Hooks
+export {
+  useTeamManagement,
+  useCurrentTeam,
+  useTeamMembers
+} from './useTeamManagement';
+
+// Team Parameter Library Hooks
+export {
+  useTeamParameterLibrary,
+  useTeamPreset,
+  useTeamPresetSearch
+} from './useTeamParameterLibrary';
+
 // API Hooks
 export {
   // Base hooks
