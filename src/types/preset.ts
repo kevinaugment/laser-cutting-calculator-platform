@@ -254,6 +254,104 @@ export interface KerfWidthPresetParameters extends PresetParameters {
   cuttingSpeed: number;
 }
 
+// Additional calculator preset parameter types (Batch 2)
+export interface BatchProcessingCalculatorPresetParameters extends PresetParameters {
+  batchSize: number;
+  partCount: number;
+  setupTime: number;
+  cycleTime: number;
+}
+
+export interface BeamQualityCalculatorPresetParameters extends PresetParameters {
+  laserPower: number;
+  beamDiameter: number;
+  focusLength: number;
+  wavelength: number;
+}
+
+export interface CompetitivePricingCalculatorPresetParameters extends PresetParameters {
+  baseCost: number;
+  margin: number;
+  competitorPrice: number;
+  marketFactor: number;
+}
+
+export interface CutPathOptimizerPresetParameters extends PresetParameters {
+  partCount: number;
+  sheetSize: { width: number; height: number };
+  materialThickness: number;
+  optimizationGoal: string;
+}
+
+export interface EdgeQualityPredictorCalculatorPresetParameters extends PresetParameters {
+  materialType: string;
+  thickness: number;
+  cuttingSpeed: number;
+  laserPower: number;
+  gasType: string;
+}
+
+export interface FocusHeightCalculatorPresetParameters extends PresetParameters {
+  materialType: string;
+  thickness: number;
+  lensType: string;
+  beamDiameter: number;
+}
+
+export interface HeatAffectedZoneCalculatorPresetParameters extends PresetParameters {
+  materialType: string;
+  thickness: number;
+  laserPower: number;
+  cuttingSpeed: number;
+  thermalConductivity: number;
+}
+
+export interface JobQueueOptimizerPresetParameters extends PresetParameters {
+  jobCount: number;
+  machineCount: number;
+  priorityWeights: { urgency: number; profit: number; efficiency: number };
+  workingHours: number;
+}
+
+export interface MaterialNestingOptimizerPresetParameters extends PresetParameters {
+  parts: any[];
+  sheetSize: { width: number; height: number };
+  materialCost: number;
+  wasteFactor: number;
+}
+
+export interface PowerRequirementCalculatorPresetParameters extends PresetParameters {
+  materialType: string;
+  thickness: number;
+  cuttingSpeed: number;
+  quality: string;
+  gasType: string;
+}
+
+export interface ProfitMarginCalculatorPresetParameters extends PresetParameters {
+  totalCost: number;
+  targetMargin: number;
+  marketPrice: number;
+  competitionLevel: string;
+}
+
+export interface ProjectQuotingCalculatorPresetParameters extends PresetParameters {
+  projectType: string;
+  complexity: string;
+  quantity: number;
+  deadline: string;
+  materialCost: number;
+  laborHours: number;
+}
+
+export interface WarpingRiskCalculatorPresetParameters extends PresetParameters {
+  materialType: string;
+  thickness: number;
+  partSize: { width: number; height: number };
+  cuttingPattern: string;
+  coolingRate: string;
+}
+
 export interface GasConsumptionPresetParameters extends PresetParameters {
   gasType: 'oxygen' | 'nitrogen' | 'air';
   pressure: number;
