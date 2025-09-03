@@ -19,6 +19,7 @@ import { ExpertValidationPanel } from './ExpertValidationPanel';
 import { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
 import { KnowledgeTransferPanel } from './KnowledgeTransferPanel';
 import { MLModelManagementPanel } from './MLModelManagementPanel';
+import { MobileOptimizationPanel } from './MobileOptimizationPanel';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -26,10 +27,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models' | 'mobile';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models' | 'mobile';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -189,6 +190,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'Deploy and manage ML models with monitoring, versioning, and rollback capabilities',
+    },
+    {
+      id: 'mobile' as TabType,
+      label: 'Mobile Optimization',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z" />
+        </svg>
+      ),
+      description: 'Optimize memory system features for mobile devices with responsive design and touch interactions',
     },
   ];
 
@@ -458,6 +469,18 @@ export function MemorySystemPanel({
                 showModelList={true}
                 showMonitoring={true}
                 showInference={true}
+                className="border-0 shadow-none"
+              />
+            </div>
+          )}
+
+          {activeTab === 'mobile' && (
+            <div className="p-4">
+              <MobileOptimizationPanel
+                showDeviceInfo={true}
+                showAnalytics={true}
+                showTouchTracking={true}
+                showOptimizationSettings={true}
                 className="border-0 shadow-none"
               />
             </div>

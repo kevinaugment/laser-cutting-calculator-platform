@@ -137,6 +137,16 @@ export {
   useModelManagement
 } from './useMLModels';
 
+// Mobile Optimization Hooks
+export {
+  useMobileOptimization,
+  useDeviceDetection,
+  useResponsiveDesign,
+  useTouchInteractions,
+  useMobileAnalytics,
+  useMobileFirst
+} from './useMobileOptimization';
+
 // API Hooks
 export {
   // Base hooks
