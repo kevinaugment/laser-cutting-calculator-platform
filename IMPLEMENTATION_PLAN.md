@@ -1,51 +1,51 @@
-# Implementation Plan: Preset UI Components (Task #003)
+# Implementation Plan: Calculator Integration (Task #004)
 
-## Stage 1: Base Components & Layout
-**Goal**: Create foundational preset UI components with basic structure
+## Stage 1: Calculator Audit & Analysis
+**Goal**: Analyze existing calculators and their parameter structures
 **Success Criteria**:
-- PresetManager component with basic layout
-- PresetDropdown component with selection functionality
-- Components use design system theme
-- Basic responsive design implemented
-**Tests**: Component rendering tests pass
+- Complete inventory of all 27 calculators
+- Parameter structure mapping for each calculator
+- Identify common patterns and edge cases
+- Plan integration approach for each calculator type
+**Tests**: Parameter mapping validation
 **Status**: ✅ Complete
 
-## Stage 2: CRUD Operations UI
-**Goal**: Implement create, read, update, delete operations in UI
+## Stage 2: Shared Integration Infrastructure
+**Goal**: Create shared components and utilities for calculator integration
 **Success Criteria**:
-- PresetForm modal for creating/editing presets
-- Delete confirmation dialogs
-- Integration with usePresets hook
-- Form validation and error handling
-**Tests**: CRUD operation tests pass
+- CalculatorLayout wrapper component
+- useCalculatorPresets hook
+- Parameter mapping utilities
+- Validation helpers for calculator-specific presets
+**Tests**: Infrastructure component tests pass
 **Status**: ✅ Complete
 
-## Stage 3: Advanced Features
-**Goal**: Add search, filter, and list management features
+## Stage 3: Core Calculator Integration (Batch 1)
+**Goal**: Integrate preset functionality into first batch of calculators
 **Success Criteria**:
-- PresetList component with search/filter
-- Sorting and pagination functionality
-- Bulk operations support
-- Loading states and error handling
-**Tests**: Advanced feature tests pass
-**Status**: ✅ Complete
+- 9 core calculators integrated with preset functionality
+- Consistent UI placement and styling
+- Parameter mapping working correctly
+- Backward compatibility maintained
+**Tests**: Integration tests for batch 1 calculators
+**Status**: ✅ In Progress (1/9 completed)
 
-## Stage 4: Mobile & Accessibility
-**Goal**: Ensure mobile responsiveness and accessibility compliance
+## Stage 4: Advanced Calculator Integration (Batch 2)
+**Goal**: Integrate preset functionality into second batch of calculators
 **Success Criteria**:
-- Mobile-responsive design verified
-- Keyboard navigation working
-- Screen reader support implemented
-- Touch-friendly interactions
-**Tests**: Accessibility and mobile tests pass
+- 9 advanced calculators integrated
+- Complex parameter validation working
+- Edge cases handled properly
+- Mobile responsiveness verified
+**Tests**: Integration tests for batch 2 calculators
 **Status**: Not Started
 
-## Stage 5: Integration & Documentation
-**Goal**: Final integration and documentation
+## Stage 5: Specialized Calculator Integration (Batch 3)
+**Goal**: Complete integration for remaining specialized calculators
 **Success Criteria**:
-- Components integrated with existing calculators
-- Storybook stories created
-- Usage documentation complete
-- Performance optimization verified
-**Tests**: Integration tests pass
+- Final 9 calculators integrated
+- All 27 calculators have preset functionality
+- Cross-calculator compatibility verified
+- Performance optimization completed
+**Tests**: Full integration test suite passes
 **Status**: Not Started
