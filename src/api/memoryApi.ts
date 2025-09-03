@@ -452,6 +452,80 @@ export class MemoryApiClient {
   }
 
   // ============================================================================
+  // Pattern Recognition API
+  // ============================================================================
+
+  /**
+   * Analyze user patterns
+   */
+  public async analyzePatterns(
+    userId?: string,
+    options?: {
+      patternTypes?: string[];
+      analysisWindowDays?: number;
+      minConfidence?: number;
+    }
+  ): Promise<ApiResponse<{
+    patterns: any[];
+    analysisTimestamp: string;
+    totalPatterns: number;
+  }>> {
+    const payload = { userId, options };
+    return this.request('POST', '/patterns/analyze', payload);
+  }
+
+  /**
+   * Get patterns by type
+   */
+  public async getPatternsByType(
+    patternType: string,
+    userId?: string,
+    options?: {
+      limit?: number;
+      minConfidence?: number;
+    }
+  ): Promise<ApiResponse<{
+    patterns: any[];
+    total: number;
+  }>> {
+    const params = this.buildQueryParams({ patternType, userId, ...options });
+    return this.request('GET', `/patterns/type?${params}`);
+  }
+
+  /**
+   * Get pattern insights
+   */
+  public async getPatternInsights(
+    userId?: string,
+    options?: {
+      categories?: string[];
+      limit?: number;
+    }
+  ): Promise<ApiResponse<{
+    insights: any[];
+    categories: Record<string, any[]>;
+    anomalies: any[];
+  }>> {
+    const params = this.buildQueryParams({ userId, ...options });
+    return this.request('GET', `/patterns/insights?${params}`);
+  }
+
+  /**
+   * Get pattern statistics
+   */
+  public async getPatternStats(
+    userId?: string
+  ): Promise<ApiResponse<{
+    totalPatterns: number;
+    patternsByType: Record<string, number>;
+    averageConfidence: number;
+    lastAnalysis: string;
+  }>> {
+    const params = this.buildQueryParams({ userId });
+    return this.request('GET', `/patterns/stats?${params}`);
+  }
+
+  // ============================================================================
   // Private Helper Methods
   // ============================================================================
 

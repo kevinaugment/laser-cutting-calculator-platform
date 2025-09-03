@@ -9,6 +9,8 @@ import { CalculationHistoryPanel } from './CalculationHistoryPanel';
 import { ParameterPresetPanel } from './ParameterPresetPanel';
 import { UserPreferencesPanel } from './UserPreferencesPanel';
 import { HistoryStatsWidget } from './HistoryStatsWidget';
+import { PatternInsightsPanel } from './PatternInsightsPanel';
+import { PatternStatsWidget } from './PatternStatsWidget';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -16,10 +18,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -89,6 +91,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'View usage statistics and insights',
+    },
+    {
+      id: 'insights' as TabType,
+      label: 'AI Insights',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
+      description: 'AI-powered pattern insights and recommendations',
     },
   ];
 
@@ -179,40 +191,15 @@ export function MemorySystemPanel({
                   />
                 </div>
 
-                {/* Additional Stats Sections */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Quick Stats */}
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h4 className="text-md font-medium text-gray-900 mb-3">
-                      Quick Stats
-                    </h4>
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Total Calculations:</span>
-                        <span className="font-medium text-gray-900">-</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Saved Presets:</span>
-                        <span className="font-medium text-gray-900">-</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-gray-600">Most Used Calculator:</span>
-                        <span className="font-medium text-gray-900">-</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Recent Activity */}
-                  <div className="bg-gray-50 rounded-lg p-4">
-                    <h4 className="text-md font-medium text-gray-900 mb-3">
-                      Recent Activity
-                    </h4>
-                    <div className="space-y-2">
-                      <div className="text-sm text-gray-600">
-                        No recent activity to display
-                      </div>
-                    </div>
-                  </div>
+                {/* Pattern Statistics */}
+                <div>
+                  <h3 className="text-lg font-medium text-gray-900 mb-4">
+                    Pattern Analysis
+                  </h3>
+                  <PatternStatsWidget
+                    showDetails={true}
+                    className="border-0 shadow-none"
+                  />
                 </div>
 
                 {/* Memory Usage Tips */}
@@ -233,12 +220,24 @@ export function MemorySystemPanel({
                           <li>Use the history to track your calculation patterns</li>
                           <li>Configure preferences to customize your experience</li>
                           <li>Export your data for backup and analysis</li>
+                          <li>Check AI insights for optimization recommendations</li>
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          )}
+
+          {activeTab === 'insights' && (
+            <div className="p-4">
+              <PatternInsightsPanel
+                showCategories={true}
+                showAnomalies={true}
+                maxInsights={20}
+                className="border-0 shadow-none"
+              />
             </div>
           )}
         </div>

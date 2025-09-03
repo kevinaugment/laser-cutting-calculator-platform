@@ -438,6 +438,238 @@ export class MemoryApiMock {
       return this.createErrorResponse(error instanceof Error ? error.message : 'Import failed');
     }
   }
+
+  // ============================================================================
+  // Pattern Recognition API Mock
+  // ============================================================================
+
+  public async analyzePatterns(
+    userId?: string,
+    options?: {
+      patternTypes?: string[];
+      analysisWindowDays?: number;
+      minConfidence?: number;
+    }
+  ): Promise<ApiResponse<{
+    patterns: any[];
+    analysisTimestamp: string;
+    totalPatterns: number;
+  }>> {
+    await this.mockDelay();
+
+    try {
+      const { patternRecognitionService } = await import('../services/patternRecognitionService');
+      const patterns = await patternRecognitionService.analyzeUserPatterns(userId || 'anonymous-user');
+
+      // Filter by pattern types if specified
+      let filteredPatterns = patterns;
+      if (options?.patternTypes && options.patternTypes.length > 0) {
+        filteredPatterns = patterns.filter(p => options.patternTypes!.includes(p.type));
+      }
+
+      // Filter by confidence if specified
+      if (options?.minConfidence) {
+        filteredPatterns = filteredPatterns.filter(p => p.confidence >= options.minConfidence!);
+      }
+
+      return this.createSuccessResponse({
+        patterns: filteredPatterns,
+        analysisTimestamp: new Date().toISOString(),
+        totalPatterns: filteredPatterns.length,
+      });
+    } catch (error) {
+      return this.createErrorResponse(error instanceof Error ? error.message : 'Pattern analysis failed');
+    }
+  }
+
+  public async getPatternsByType(
+    patternType: string,
+    userId?: string,
+    options?: {
+      limit?: number;
+      minConfidence?: number;
+    }
+  ): Promise<ApiResponse<{
+    patterns: any[];
+    total: number;
+  }>> {
+    await this.mockDelay();
+
+    try {
+      const { patternRecognitionService } = await import('../services/patternRecognitionService');
+      let patterns = await patternRecognitionService.getPatternsByType(
+        patternType as any,
+        userId || 'anonymous-user'
+      );
+
+      // Filter by confidence if specified
+      if (options?.minConfidence) {
+        patterns = patterns.filter(p => p.confidence >= options.minConfidence!);
+      }
+
+      // Apply limit if specified
+      if (options?.limit) {
+        patterns = patterns.slice(0, options.limit);
+      }
+
+      return this.createSuccessResponse({
+        patterns,
+        total: patterns.length,
+      });
+    } catch (error) {
+      return this.createErrorResponse(error instanceof Error ? error.message : 'Failed to get patterns by type');
+    }
+  }
+
+  public async getPatternInsights(
+    userId?: string,
+    options?: {
+      categories?: string[];
+      limit?: number;
+    }
+  ): Promise<ApiResponse<{
+    insights: any[];
+    categories: Record<string, any[]>;
+    anomalies: any[];
+  }>> {
+    await this.mockDelay();
+
+    try {
+      const { patternRecognitionService } = await import('../services/patternRecognitionService');
+      const patterns = await patternRecognitionService.analyzeUserPatterns(userId || 'anonymous-user');
+
+      // Generate insights from patterns
+      const insights = patterns.map(pattern => ({
+        id: pattern.id,
+        type: pattern.type,
+        confidence: pattern.confidence,
+        description: pattern.description,
+        recommendation: this.generateRecommendation(pattern),
+        priority: this.calculatePriority(pattern),
+      }));
+
+      // Categorize insights
+      const categories = {
+        optimization: insights.filter(i => ['parameter-frequency', 'parameter-combination', 'parameter-correlation'].includes(i.type)),
+        workflow: insights.filter(i => ['behavior-sequence', 'time-activity', 'usage-evolution'].includes(i.type)),
+        quality: insights.filter(i => ['anomaly-detection'].includes(i.type)),
+        usage: insights.filter(i => ['calculator-usage'].includes(i.type)),
+      };
+
+      // Filter categories if specified
+      let filteredCategories = categories;
+      if (options?.categories && options.categories.length > 0) {
+        filteredCategories = {};
+        options.categories.forEach(cat => {
+          if (categories[cat as keyof typeof categories]) {
+            filteredCategories[cat] = categories[cat as keyof typeof categories];
+          }
+        });
+      }
+
+      // Get anomalies
+      const anomalies = insights.filter(i => i.type === 'anomaly-detection');
+
+      // Apply limit if specified
+      let limitedInsights = insights;
+      if (options?.limit) {
+        limitedInsights = insights.slice(0, options.limit);
+      }
+
+      return this.createSuccessResponse({
+        insights: limitedInsights,
+        categories: filteredCategories,
+        anomalies,
+      });
+    } catch (error) {
+      return this.createErrorResponse(error instanceof Error ? error.message : 'Failed to get pattern insights');
+    }
+  }
+
+  public async getPatternStats(
+    userId?: string
+  ): Promise<ApiResponse<{
+    totalPatterns: number;
+    patternsByType: Record<string, number>;
+    averageConfidence: number;
+    lastAnalysis: string;
+  }>> {
+    await this.mockDelay();
+
+    try {
+      const { patternRecognitionService } = await import('../services/patternRecognitionService');
+      const patterns = await patternRecognitionService.analyzeUserPatterns(userId || 'anonymous-user');
+
+      // Calculate statistics
+      const patternsByType: Record<string, number> = {};
+      patterns.forEach(pattern => {
+        patternsByType[pattern.type] = (patternsByType[pattern.type] || 0) + 1;
+      });
+
+      const averageConfidence = patterns.length > 0
+        ? patterns.reduce((sum, p) => sum + p.confidence, 0) / patterns.length
+        : 0;
+
+      return this.createSuccessResponse({
+        totalPatterns: patterns.length,
+        patternsByType,
+        averageConfidence,
+        lastAnalysis: new Date().toISOString(),
+      });
+    } catch (error) {
+      return this.createErrorResponse(error instanceof Error ? error.message : 'Failed to get pattern stats');
+    }
+  }
+
+  // ============================================================================
+  // Helper Methods
+  // ============================================================================
+
+  private generateRecommendation(pattern: any): string {
+    switch (pattern.type) {
+      case 'parameter-frequency':
+        return `Consider creating a preset for frequently used parameter: ${pattern.data.parameter}`;
+      case 'calculator-usage':
+        return `${pattern.data.calculatorType} is your most used calculator - consider bookmarking it`;
+      case 'time-activity':
+        return `You're most active during ${pattern.data.timeSlot} - schedule complex calculations then`;
+      case 'parameter-combination':
+        return `This parameter combination works well - consider saving as a preset`;
+      case 'behavior-sequence':
+        return `You often use calculators in sequence: ${pattern.data.sequence.join(' → ')} - consider creating a workflow`;
+      case 'anomaly-detection':
+        return pattern.data.suggestedAction;
+      case 'parameter-correlation':
+        return `Parameters ${pattern.data.parameterA} and ${pattern.data.parameterB} are correlated - adjust them together`;
+      case 'usage-evolution':
+        return `Your usage is ${pattern.data.trend} - ${pattern.data.trend === 'increasing' ? 'consider upgrading your plan' : 'optimize your workflow'}`;
+      default:
+        return 'Pattern detected - consider optimizing your workflow';
+    }
+  }
+
+  private calculatePriority(pattern: any): number {
+    const typeWeights = {
+      'parameter-frequency': 0.8,
+      'calculator-usage': 0.9,
+      'time-activity': 0.6,
+      'parameter-combination': 0.7,
+      'behavior-sequence': 0.5,
+      'anomaly-detection': 1.0,
+      'parameter-correlation': 0.6,
+      'usage-evolution': 0.4,
+    };
+
+    const typeWeight = typeWeights[pattern.type as keyof typeof typeWeights] || 0.5;
+
+    // Boost priority for high-severity anomalies
+    let severityBoost = 1.0;
+    if (pattern.type === 'anomaly-detection' && pattern.data.severity === 'high') {
+      severityBoost = 1.5;
+    }
+
+    return pattern.confidence * typeWeight * severityBoost;
+  }
 }
 
 // ============================================================================
