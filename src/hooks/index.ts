@@ -45,6 +45,14 @@ export {
   useContextualRecommendations
 } from './useRecommendation';
 
+// Smart Defaults Hooks
+export {
+  useSmartDefaults,
+  useParameterSmartDefaults,
+  useFrequencyBasedDefaults,
+  useContextAwareDefaults
+} from './useSmartDefaults';
+
 // API Hooks
 export {
   // Base hooks

@@ -12,6 +12,8 @@ export { PatternInsightsPanel } from './PatternInsightsPanel';
 export { PatternStatsWidget } from './PatternStatsWidget';
 export { RecommendationPanel } from './RecommendationPanel';
 export { RecommendationWidget } from './RecommendationWidget';
+export { DefaultValueIndicator } from './DefaultValueIndicator';
+export { SmartDefaultsWidget } from './SmartDefaultsWidget';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -36,6 +38,8 @@ export type { PatternInsightsPanelProps } from './PatternInsightsPanel';
 export type { PatternStatsWidgetProps } from './PatternStatsWidget';
 export type { RecommendationPanelProps } from './RecommendationPanel';
 export type { RecommendationWidgetProps } from './RecommendationWidget';
+export type { DefaultValueIndicatorProps } from './DefaultValueIndicator';
+export type { SmartDefaultsWidgetProps } from './SmartDefaultsWidget';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,
