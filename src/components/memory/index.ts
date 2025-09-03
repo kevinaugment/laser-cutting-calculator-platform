@@ -15,6 +15,7 @@ export { RecommendationWidget } from './RecommendationWidget';
 export { DefaultValueIndicator } from './DefaultValueIndicator';
 export { SmartDefaultsWidget } from './SmartDefaultsWidget';
 export { ConfidenceIndicator } from './ConfidenceIndicator';
+export { ABTestingPanel } from './ABTestingPanel';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -42,6 +43,7 @@ export type { RecommendationWidgetProps } from './RecommendationWidget';
 export type { DefaultValueIndicatorProps } from './DefaultValueIndicator';
 export type { SmartDefaultsWidgetProps } from './SmartDefaultsWidget';
 export type { ConfidenceIndicatorProps } from './ConfidenceIndicator';
+export type { ABTestingPanelProps } from './ABTestingPanel';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,

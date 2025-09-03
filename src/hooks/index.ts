@@ -61,6 +61,15 @@ export {
   useDefaultConfidence
 } from './useConfidenceScoring';
 
+// A/B Testing Hooks
+export {
+  useABTesting,
+  useExperiment,
+  useAlgorithmExperiment,
+  useUIExperiment,
+  useFeatureFlag
+} from './useABTesting';
+
 // API Hooks
 export {
   // Base hooks

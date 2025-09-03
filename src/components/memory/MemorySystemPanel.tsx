@@ -13,6 +13,7 @@ import { PatternInsightsPanel } from './PatternInsightsPanel';
 import { PatternStatsWidget } from './PatternStatsWidget';
 import { RecommendationPanel } from './RecommendationPanel';
 import { SmartDefaultsWidget } from './SmartDefaultsWidget';
+import { ABTestingPanel } from './ABTestingPanel';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -20,10 +21,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -123,6 +124,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'Intelligent default values based on usage patterns',
+    },
+    {
+      id: 'ab-testing' as TabType,
+      label: 'A/B Testing',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      ),
+      description: 'A/B testing framework for algorithm and UI optimization',
     },
   ];
 
@@ -324,6 +335,16 @@ export function MemorySystemPanel({
                   </div>
                 </div>
               </div>
+            </div>
+          )}
+
+          {activeTab === 'ab-testing' && (
+            <div className="p-4">
+              <ABTestingPanel
+                showResults={true}
+                showCreateForm={false}
+                className="border-0 shadow-none"
+              />
             </div>
           )}
         </div>
