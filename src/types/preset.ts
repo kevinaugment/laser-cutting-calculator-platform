@@ -178,6 +178,82 @@ export interface CuttingTimePresetParameters extends PresetParameters {
   setupTime: number;
 }
 
+// Additional calculator preset parameter types
+export interface CuttingTimeEstimatorPresetParameters extends PresetParameters {
+  totalLength: number;
+  pierceCount: number;
+  materialType: string;
+  thickness: number;
+  cuttingSpeed: number;
+  pierceTime: number;
+  setupTime: number;
+  gasType: string;
+  complexity: string;
+}
+
+export interface GasConsumptionPresetParameters extends PresetParameters {
+  gasType: string;
+  pressure: number;
+  flowRate: number;
+  cuttingTime: number;
+  materialType: string;
+  thickness: number;
+  nozzleDiameter: number;
+  efficiency: number;
+}
+
+export interface LaserParameterOptimizerPresetParameters extends PresetParameters {
+  materialType: string;
+  thickness: number;
+  quality: string;
+  speed: string;
+}
+
+export interface ProductionCapacityPresetParameters extends PresetParameters {
+  machineCount: number;
+  workingHours: number;
+  efficiency: number;
+  downtime: number;
+}
+
+export interface QualityGradePresetParameters extends PresetParameters {
+  materialType: string;
+  thickness: number;
+  tolerance: number;
+  surfaceFinish: string;
+  edgeQuality: string;
+}
+
+export interface EnergyCostPresetParameters extends PresetParameters {
+  laserPower: number;
+  operatingTime: number;
+  electricityRate: number;
+  efficiency: number;
+  auxiliaryPower: number;
+}
+
+export interface MaintenanceCostPresetParameters extends PresetParameters {
+  machineValue: number;
+  operatingHours: number;
+  maintenanceRate: number;
+  consumables: number;
+}
+
+export interface EquipmentComparisonPresetParameters extends PresetParameters {
+  machine1: string;
+  machine2: string;
+  criteria: string;
+  weights: string;
+}
+
+export interface KerfWidthPresetParameters extends PresetParameters {
+  materialType: string;
+  thickness: number;
+  laserPower: number;
+  gasType: string;
+  cuttingSpeed: number;
+}
+
 export interface GasConsumptionPresetParameters extends PresetParameters {
   gasType: 'oxygen' | 'nitrogen' | 'air';
   pressure: number;
