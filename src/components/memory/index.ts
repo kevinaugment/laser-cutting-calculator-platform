@@ -18,6 +18,7 @@ export { ConfidenceIndicator } from './ConfidenceIndicator';
 export { ABTestingPanel } from './ABTestingPanel';
 export { ParameterSharingPanel } from './ParameterSharingPanel';
 export { ExpertValidationPanel } from './ExpertValidationPanel';
+export { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -48,6 +49,7 @@ export type { ConfidenceIndicatorProps } from './ConfidenceIndicator';
 export type { ABTestingPanelProps } from './ABTestingPanel';
 export type { ParameterSharingPanelProps } from './ParameterSharingPanel';
 export type { ExpertValidationPanelProps } from './ExpertValidationPanel';
+export type { UsageAnalyticsDashboardProps } from './UsageAnalyticsDashboard';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,

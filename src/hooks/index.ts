@@ -100,6 +100,16 @@ export {
   usePresetValidation
 } from './useExpertValidation';
 
+// Usage Analytics Hooks
+export {
+  useUsageAnalytics,
+  useUsageTracking,
+  useDashboardStatistics,
+  useTeamAnalyticsDashboard,
+  useAnalyticsReports,
+  usePerformanceMonitoring
+} from './useUsageAnalytics';
+
 // API Hooks
 export {
   // Base hooks

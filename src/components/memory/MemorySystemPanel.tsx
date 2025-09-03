@@ -16,6 +16,7 @@ import { SmartDefaultsWidget } from './SmartDefaultsWidget';
 import { ABTestingPanel } from './ABTestingPanel';
 import { ParameterSharingPanel } from './ParameterSharingPanel';
 import { ExpertValidationPanel } from './ExpertValidationPanel';
+import { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -23,10 +24,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -156,6 +157,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'Expert validation of parameter presets with authority indicators',
+    },
+    {
+      id: 'analytics' as TabType,
+      label: 'Usage Analytics',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+      ),
+      description: 'Track parameter usage, success rates, and team performance analytics',
     },
   ];
 
@@ -389,6 +400,19 @@ export function MemorySystemPanel({
                 showExpertProfile={true}
                 showValidationRequests={true}
                 showValidationResults={true}
+                className="border-0 shadow-none"
+              />
+            </div>
+          )}
+
+          {activeTab === 'analytics' && (
+            <div className="p-4">
+              <UsageAnalyticsDashboard
+                userId={userId}
+                showTeamAnalytics={true}
+                showPerformanceMetrics={true}
+                showUserActivity={true}
+                defaultTimeframe="week"
                 className="border-0 shadow-none"
               />
             </div>
