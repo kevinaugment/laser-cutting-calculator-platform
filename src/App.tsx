@@ -1,5 +1,6 @@
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
+import { ThemeProvider } from './theme';
 import AppRouter from './router/AppRouter';
 
 function App() {
@@ -7,7 +8,9 @@ function App() {
 
   return (
     <HelmetProvider>
-      <AppRouter />
+      <ThemeProvider>
+        <AppRouter />
+      </ThemeProvider>
     </HelmetProvider>
   );
 }
