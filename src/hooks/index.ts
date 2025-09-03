@@ -84,6 +84,13 @@ export {
   useTeamPresetSearch
 } from './useTeamParameterLibrary';
 
+// Parameter Sharing Hooks
+export {
+  useParameterSharing,
+  useShareNotifications,
+  usePresetSharing
+} from './useParameterSharing';
+
 // API Hooks
 export {
   // Base hooks
