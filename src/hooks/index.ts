@@ -110,6 +110,15 @@ export {
   usePerformanceMonitoring
 } from './useUsageAnalytics';
 
+// Knowledge Transfer Hooks
+export {
+  useKnowledgeTransfer,
+  useKnowledgeItems,
+  useLearningPaths,
+  useLearningProgress,
+  useKnowledgeAnalytics
+} from './useKnowledgeTransfer';
+
 // API Hooks
 export {
   // Base hooks

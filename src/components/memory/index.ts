@@ -19,6 +19,7 @@ export { ABTestingPanel } from './ABTestingPanel';
 export { ParameterSharingPanel } from './ParameterSharingPanel';
 export { ExpertValidationPanel } from './ExpertValidationPanel';
 export { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
+export { KnowledgeTransferPanel } from './KnowledgeTransferPanel';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -50,6 +51,7 @@ export type { ABTestingPanelProps } from './ABTestingPanel';
 export type { ParameterSharingPanelProps } from './ParameterSharingPanel';
 export type { ExpertValidationPanelProps } from './ExpertValidationPanel';
 export type { UsageAnalyticsDashboardProps } from './UsageAnalyticsDashboard';
+export type { KnowledgeTransferPanelProps } from './KnowledgeTransferPanel';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,

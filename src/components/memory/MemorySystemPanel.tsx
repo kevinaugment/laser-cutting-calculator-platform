@@ -17,6 +17,7 @@ import { ABTestingPanel } from './ABTestingPanel';
 import { ParameterSharingPanel } from './ParameterSharingPanel';
 import { ExpertValidationPanel } from './ExpertValidationPanel';
 import { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
+import { KnowledgeTransferPanel } from './KnowledgeTransferPanel';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -24,10 +25,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -167,6 +168,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'Track parameter usage, success rates, and team performance analytics',
+    },
+    {
+      id: 'knowledge' as TabType,
+      label: 'Knowledge Transfer',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      ),
+      description: 'Capture and transfer expert knowledge through structured learning paths',
     },
   ];
 
@@ -413,6 +424,18 @@ export function MemorySystemPanel({
                 showPerformanceMetrics={true}
                 showUserActivity={true}
                 defaultTimeframe="week"
+                className="border-0 shadow-none"
+              />
+            </div>
+          )}
+
+          {activeTab === 'knowledge' && (
+            <div className="p-4">
+              <KnowledgeTransferPanel
+                userId={userId}
+                showKnowledgeItems={true}
+                showLearningPaths={true}
+                showProgress={true}
                 className="border-0 shadow-none"
               />
             </div>
