@@ -6,6 +6,8 @@
 import React, { useState, useCallback } from 'react';
 import { useTheme } from '../../theme';
 import { DefaultValueResult } from '../../services/smartDefaultsService';
+import { useDefaultConfidence } from '../../hooks/useConfidenceScoring';
+import { ConfidenceIndicator } from './ConfidenceIndicator';
 
 export interface DefaultValueIndicatorProps {
   defaultValue: DefaultValueResult | null;

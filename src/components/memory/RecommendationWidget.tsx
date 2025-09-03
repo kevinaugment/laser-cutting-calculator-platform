@@ -6,6 +6,8 @@
 import React, { useState, useCallback } from 'react';
 import { useTheme } from '../../theme';
 import { useRecommendation } from '../../hooks/useRecommendation';
+import { useRecommendationConfidence } from '../../hooks/useConfidenceScoring';
+import { ConfidenceIndicator } from './ConfidenceIndicator';
 import { RecommendationType, RecommendationResult } from '../../services/recommendationService';
 
 export interface RecommendationWidgetProps {

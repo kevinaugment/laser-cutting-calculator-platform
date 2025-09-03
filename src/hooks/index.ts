@@ -53,6 +53,14 @@ export {
   useContextAwareDefaults
 } from './useSmartDefaults';
 
+// Confidence Scoring Hooks
+export {
+  useConfidenceScoring,
+  useRecommendationConfidence,
+  usePatternConfidence,
+  useDefaultConfidence
+} from './useConfidenceScoring';
+
 // API Hooks
 export {
   // Base hooks
