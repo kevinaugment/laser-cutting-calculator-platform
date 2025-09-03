@@ -129,6 +129,14 @@ export {
   usePerformanceTimer
 } from './usePerformanceOptimization';
 
+// ML Models Hooks
+export {
+  useMLModels,
+  useModelInference,
+  useModelMonitoring,
+  useModelManagement
+} from './useMLModels';
+
 // API Hooks
 export {
   // Base hooks

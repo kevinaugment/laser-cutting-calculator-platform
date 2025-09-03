@@ -20,6 +20,7 @@ export { ParameterSharingPanel } from './ParameterSharingPanel';
 export { ExpertValidationPanel } from './ExpertValidationPanel';
 export { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
 export { KnowledgeTransferPanel } from './KnowledgeTransferPanel';
+export { MLModelManagementPanel } from './MLModelManagementPanel';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -52,6 +53,7 @@ export type { ParameterSharingPanelProps } from './ParameterSharingPanel';
 export type { ExpertValidationPanelProps } from './ExpertValidationPanel';
 export type { UsageAnalyticsDashboardProps } from './UsageAnalyticsDashboard';
 export type { KnowledgeTransferPanelProps } from './KnowledgeTransferPanel';
+export type { MLModelManagementPanelProps } from './MLModelManagementPanel';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,

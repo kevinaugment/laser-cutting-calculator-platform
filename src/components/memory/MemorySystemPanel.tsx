@@ -18,6 +18,7 @@ import { ParameterSharingPanel } from './ParameterSharingPanel';
 import { ExpertValidationPanel } from './ExpertValidationPanel';
 import { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
 import { KnowledgeTransferPanel } from './KnowledgeTransferPanel';
+import { MLModelManagementPanel } from './MLModelManagementPanel';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -25,10 +26,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -178,6 +179,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'Capture and transfer expert knowledge through structured learning paths',
+    },
+    {
+      id: 'ml-models' as TabType,
+      label: 'ML Models',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+        </svg>
+      ),
+      description: 'Deploy and manage ML models with monitoring, versioning, and rollback capabilities',
     },
   ];
 
@@ -436,6 +447,17 @@ export function MemorySystemPanel({
                 showKnowledgeItems={true}
                 showLearningPaths={true}
                 showProgress={true}
+                className="border-0 shadow-none"
+              />
+            </div>
+          )}
+
+          {activeTab === 'ml-models' && (
+            <div className="p-4">
+              <MLModelManagementPanel
+                showModelList={true}
+                showMonitoring={true}
+                showInference={true}
                 className="border-0 shadow-none"
               />
             </div>
