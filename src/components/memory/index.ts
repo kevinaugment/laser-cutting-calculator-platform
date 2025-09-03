@@ -17,6 +17,7 @@ export { SmartDefaultsWidget } from './SmartDefaultsWidget';
 export { ConfidenceIndicator } from './ConfidenceIndicator';
 export { ABTestingPanel } from './ABTestingPanel';
 export { ParameterSharingPanel } from './ParameterSharingPanel';
+export { ExpertValidationPanel } from './ExpertValidationPanel';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -46,6 +47,7 @@ export type { SmartDefaultsWidgetProps } from './SmartDefaultsWidget';
 export type { ConfidenceIndicatorProps } from './ConfidenceIndicator';
 export type { ABTestingPanelProps } from './ABTestingPanel';
 export type { ParameterSharingPanelProps } from './ParameterSharingPanel';
+export type { ExpertValidationPanelProps } from './ExpertValidationPanel';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,

@@ -15,6 +15,7 @@ import { RecommendationPanel } from './RecommendationPanel';
 import { SmartDefaultsWidget } from './SmartDefaultsWidget';
 import { ABTestingPanel } from './ABTestingPanel';
 import { ParameterSharingPanel } from './ParameterSharingPanel';
+import { ExpertValidationPanel } from './ExpertValidationPanel';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -22,10 +23,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -145,6 +146,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'Share parameter presets with team members and manage notifications',
+    },
+    {
+      id: 'validation' as TabType,
+      label: 'Expert Validation',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+        </svg>
+      ),
+      description: 'Expert validation of parameter presets with authority indicators',
     },
   ];
 
@@ -366,6 +377,18 @@ export function MemorySystemPanel({
                 showNotifications={true}
                 showShareRequests={true}
                 showShareLinks={true}
+                className="border-0 shadow-none"
+              />
+            </div>
+          )}
+
+          {activeTab === 'validation' && (
+            <div className="p-4">
+              <ExpertValidationPanel
+                userId={userId}
+                showExpertProfile={true}
+                showValidationRequests={true}
+                showValidationResults={true}
                 className="border-0 shadow-none"
               />
             </div>

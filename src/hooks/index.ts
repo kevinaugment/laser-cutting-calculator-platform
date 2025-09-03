@@ -91,6 +91,15 @@ export {
   usePresetSharing
 } from './useParameterSharing';
 
+// Expert Validation Hooks
+export {
+  useExpertValidation,
+  useExpertProfile,
+  useValidationRequests,
+  useValidationResults,
+  usePresetValidation
+} from './useExpertValidation';
+
 // API Hooks
 export {
   // Base hooks
