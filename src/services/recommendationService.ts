@@ -1,7 +1,11 @@
 /**
  * Recommendation Service
  * ML-based recommendation engine for parameter optimization and smart suggestions
+ * Enhanced with caching and performance monitoring
  */
+
+import { cacheService, CacheKeyGenerator, cached } from './cacheService';
+import { performanceMonitoringService } from './performanceMonitoringService';
 
 import { calculationHistoryService } from './calculationHistoryService';
 import { patternRecognitionService } from './patternRecognitionService';

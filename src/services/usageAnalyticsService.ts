@@ -1,8 +1,11 @@
 /**
  * Usage Analytics Service
  * Tracks and analyzes parameter usage, success rates, and team performance
+ * Enhanced with caching and performance monitoring
  */
 
+import { cacheService, CacheKeyGenerator, cached } from './cacheService';
+import { performanceMonitoringService } from './performanceMonitoringService';
 import { teamManagementService } from './teamManagementService';
 import { TeamParameterPreset } from './teamParameterLibraryService';
 
@@ -307,8 +310,10 @@ export class UsageAnalyticsService {
   // ============================================================================
 
   /**
-   * Get usage statistics
+   * Get usage statistics (with caching)
    */
+  @cached(5 * 60 * 1000, (query: Partial<AnalyticsQuery> = {}) =>
+    CacheKeyGenerator.forAnalytics('usage-stats', query.timeframe || 'week', query))
   public async getUsageStatistics(
     query: Partial<AnalyticsQuery> = {}
   ): Promise<UsageStatistics> {

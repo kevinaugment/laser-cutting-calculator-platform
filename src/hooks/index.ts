@@ -119,6 +119,16 @@ export {
   useKnowledgeAnalytics
 } from './useKnowledgeTransfer';
 
+// Performance Optimization Hooks
+export {
+  usePerformanceOptimization,
+  usePerformanceDashboard,
+  useOperationTiming,
+  useCacheManagement,
+  usePerformanceAlerts,
+  usePerformanceTimer
+} from './usePerformanceOptimization';
+
 // API Hooks
 export {
   // Base hooks

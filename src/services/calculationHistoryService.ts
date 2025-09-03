@@ -1,7 +1,11 @@
 /**
  * Calculation History Service
  * Manages calculation history tracking, storage, and retrieval
+ * Enhanced with caching and performance monitoring
  */
+
+import { cacheService, CacheKeyGenerator, cached } from './cacheService';
+import { performanceMonitoringService } from './performanceMonitoringService';
 
 import { 
   CalculationRecord, 
@@ -155,8 +159,10 @@ export class CalculationHistoryService {
   }
 
   /**
-   * Get calculation history with optional filtering
+   * Get calculation history with optional filtering (with caching)
    */
+  @cached(2 * 60 * 1000, (query?: HistoryQuery) =>
+    CacheKeyGenerator.forUser('current', 'history', query || {}))
   public async getHistory(query?: HistoryQuery): Promise<{
     records: CalculationRecord[];
     total: number;
@@ -247,8 +253,9 @@ export class CalculationHistoryService {
   }
 
   /**
-   * Get history statistics
+   * Get history statistics (with caching)
    */
+  @cached(10 * 60 * 1000, () => 'history-stats')
   public async getStats(): Promise<HistoryStats> {
     try {
       const records = this.getUserHistory();
