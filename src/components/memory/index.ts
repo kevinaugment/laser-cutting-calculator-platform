@@ -22,6 +22,7 @@ export { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
 export { KnowledgeTransferPanel } from './KnowledgeTransferPanel';
 export { MLModelManagementPanel } from './MLModelManagementPanel';
 export { MobileOptimizationPanel } from './MobileOptimizationPanel';
+export { SecurityManagementPanel } from './SecurityManagementPanel';
 export {
   withCalculationHistory,
   useCalculatorHistory,
@@ -56,6 +57,7 @@ export type { UsageAnalyticsDashboardProps } from './UsageAnalyticsDashboard';
 export type { KnowledgeTransferPanelProps } from './KnowledgeTransferPanel';
 export type { MLModelManagementPanelProps } from './MLModelManagementPanel';
 export type { MobileOptimizationPanelProps } from './MobileOptimizationPanel';
+export type { SecurityManagementPanelProps } from './SecurityManagementPanel';
 export type {
   WithHistoryProps,
   HistoryEnhancedProps,

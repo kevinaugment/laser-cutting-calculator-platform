@@ -147,6 +147,15 @@ export {
   useMobileFirst
 } from './useMobileOptimization';
 
+// Security Hooks
+export {
+  useSecurity,
+  useEncryption,
+  useAuditLogging,
+  usePrivacyCompliance,
+  useSecurityMonitoring
+} from './useSecurity';
+
 // API Hooks
 export {
   // Base hooks

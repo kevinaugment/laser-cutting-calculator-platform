@@ -20,6 +20,7 @@ import { UsageAnalyticsDashboard } from './UsageAnalyticsDashboard';
 import { KnowledgeTransferPanel } from './KnowledgeTransferPanel';
 import { MLModelManagementPanel } from './MLModelManagementPanel';
 import { MobileOptimizationPanel } from './MobileOptimizationPanel';
+import { SecurityManagementPanel } from './SecurityManagementPanel';
 
 export interface MemorySystemPanelProps {
   calculatorType?: string;
@@ -27,10 +28,10 @@ export interface MemorySystemPanelProps {
   onParametersApply?: (parameters: Record<string, any>) => void;
   onPreferencesChange?: (preferences: any) => void;
   className?: string;
-  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models' | 'mobile';
+  defaultTab?: 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models' | 'mobile' | 'security';
 }
 
-type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models' | 'mobile';
+type TabType = 'history' | 'presets' | 'preferences' | 'stats' | 'insights' | 'recommendations' | 'smart-defaults' | 'ab-testing' | 'sharing' | 'validation' | 'analytics' | 'knowledge' | 'ml-models' | 'mobile' | 'security';
 
 export function MemorySystemPanel({
   calculatorType,
@@ -200,6 +201,16 @@ export function MemorySystemPanel({
         </svg>
       ),
       description: 'Optimize memory system features for mobile devices with responsive design and touch interactions',
+    },
+    {
+      id: 'security' as TabType,
+      label: 'Security & Privacy',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      ),
+      description: 'Comprehensive security hardening with encryption, privacy protection, and GDPR compliance',
     },
   ];
 
@@ -481,6 +492,19 @@ export function MemorySystemPanel({
                 showAnalytics={true}
                 showTouchTracking={true}
                 showOptimizationSettings={true}
+                className="border-0 shadow-none"
+              />
+            </div>
+          )}
+
+          {activeTab === 'security' && (
+            <div className="p-4">
+              <SecurityManagementPanel
+                userId={userId}
+                showSecurityMetrics={true}
+                showAuditLogs={true}
+                showPrivacySettings={true}
+                showGDPRCompliance={true}
                 className="border-0 shadow-none"
               />
             </div>
