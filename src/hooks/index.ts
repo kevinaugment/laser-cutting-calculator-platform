@@ -14,12 +14,22 @@ export { useUnitConverter } from './useUnitConverter';
 export { useCalculatorHistory } from './useCalculatorHistory';
 export { useParameterPresets } from './useParameterPresets';
 export { useUserPreferences } from './useUserPreferences';
-export { 
+export {
   useMemorySystem,
   useCalculatorMemorySystem,
   useReadOnlyMemorySystem,
   usePresetOnlyMemorySystem
 } from './useMemorySystem';
+
+// Pattern Recognition Hooks
+export {
+  usePatternRecognition,
+  useParameterFrequencyPatterns,
+  useCalculatorUsagePatterns,
+  useTimeActivityPatterns,
+  useParameterCombinationPatterns,
+  usePatternInsights
+} from './usePatternRecognition';
 
 // API Hooks
 export {
