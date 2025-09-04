@@ -1,6 +1,7 @@
 import React from 'react';
 import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './theme';
+import { OnboardingProvider, GuidedTour, WelcomeOverlay, FeedbackWidget, allTours } from './components/onboarding';
 import AppRouter from './router/AppRouter';
 
 function App() {
@@ -9,7 +10,12 @@ function App() {
   return (
     <HelmetProvider>
       <ThemeProvider>
-        <AppRouter />
+        <OnboardingProvider tours={allTours} autoStart={true} persistState={true}>
+          <AppRouter />
+          <GuidedTour />
+          <WelcomeOverlay />
+          <FeedbackWidget />
+        </OnboardingProvider>
       </ThemeProvider>
     </HelmetProvider>
   );
