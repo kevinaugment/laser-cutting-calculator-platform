@@ -4,6 +4,7 @@ import Layout from '../components/layout/Layout';
 import HomePage from '../pages/HomePage';
 import FeaturesPage from '../pages/FeaturesPage';
 import PricingPage from '../pages/PricingPage';
+import BlogPage from '../pages/BlogPage';
 import LearnPage from '../pages/LearnPage';
 import HubPage from '../pages/HubPage';
 import EpicHubPage from '../pages/EpicHubPage';
@@ -36,6 +37,9 @@ const AppRouter: React.FC = () => {
 
           {/* Pricing Page */}
           <Route path="/pricing" element={<PricingPage />} />
+
+          {/* Blog Page */}
+          <Route path="/blog" element={<BlogPage />} />
 
           {/* All Calculators Page */}
           <Route path="/calculators" element={<CalculatorsPage />} />
