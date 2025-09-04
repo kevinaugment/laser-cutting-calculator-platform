@@ -413,6 +413,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               </Link>
 
               <Link
+                to="/pricing"
+                className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  location.pathname === '/pricing'
+                    ? 'bg-blue-100 text-blue-700'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                }`}
+              >
+                <DollarSign className="w-4 h-4" />
+                <span>Pricing</span>
+              </Link>
+
+              <Link
                 to="/contact"
                 className={`flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   location.pathname === '/contact'
