@@ -1,0 +1,370 @@
+# CDN Configuration for Laser Cutting Calculator
+# Cloudflare configuration for global content delivery
+
+# Cloudflare Zone Configuration
+zone:
+  name: "lasercalc.com"
+  plan: "pro"  # Pro plan for advanced features
+  
+# DNS Configuration
+dns:
+  records:
+    - name: "@"
+      type: "A"
+      content: "104.21.0.0"  # Cloudflare proxy IP
+      proxied: true
+      ttl: 1  # Auto TTL
+      
+    - name: "www"
+      type: "CNAME"
+      content: "lasercalc.com"
+      proxied: true
+      ttl: 1
+      
+    - name: "api"
+      type: "A"
+      content: "104.21.0.1"  # API server IP
+      proxied: true
+      ttl: 1
+      
+    - name: "cdn"
+      type: "CNAME"
+      content: "lasercalc.com"
+      proxied: true
+      ttl: 1
+
+# Page Rules for Caching
+page_rules:
+  # Static assets - aggressive caching
+  - url: "lasercalc.com/assets/*"
+    actions:
+      cache_level: "cache_everything"
+      edge_cache_ttl: 31536000  # 1 year
+      browser_cache_ttl: 31536000  # 1 year
+      security_level: "medium"
+      
+  # Images - long-term caching
+  - url: "lasercalc.com/*.{jpg,jpeg,png,gif,webp,svg,ico}"
+    actions:
+      cache_level: "cache_everything"
+      edge_cache_ttl: 2592000  # 30 days
+      browser_cache_ttl: 2592000  # 30 days
+      
+  # CSS and JS - versioned caching
+  - url: "lasercalc.com/*.{css,js}"
+    actions:
+      cache_level: "cache_everything"
+      edge_cache_ttl: 604800  # 7 days
+      browser_cache_ttl: 604800  # 7 days
+      
+  # HTML pages - short caching with revalidation
+  - url: "lasercalc.com/*"
+    actions:
+      cache_level: "cache_everything"
+      edge_cache_ttl: 3600  # 1 hour
+      browser_cache_ttl: 1800  # 30 minutes
+      
+  # API endpoints - no caching
+  - url: "lasercalc.com/api/*"
+    actions:
+      cache_level: "bypass"
+      security_level: "high"
+      
+  # Calculator pages - moderate caching
+  - url: "lasercalc.com/calculator/*"
+    actions:
+      cache_level: "cache_everything"
+      edge_cache_ttl: 7200  # 2 hours
+      browser_cache_ttl: 3600  # 1 hour
+
+# Security Settings
+security:
+  # SSL/TLS Configuration
+  ssl:
+    mode: "strict"  # Strict SSL
+    min_tls_version: "1.2"
+    tls_1_3: "on"
+    automatic_https_rewrites: "on"
+    opportunistic_encryption: "on"
+    
+  # Security Headers
+  security_headers:
+    strict_transport_security:
+      enabled: true
+      max_age: 31536000
+      include_subdomains: true
+      preload: true
+      
+    content_security_policy:
+      enabled: true
+      value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.lasercalc.com"
+      
+    x_content_type_options: "nosniff"
+    x_frame_options: "DENY"
+    x_xss_protection: "1; mode=block"
+    referrer_policy: "strict-origin-when-cross-origin"
+    
+  # DDoS Protection
+  ddos_protection:
+    enabled: true
+    sensitivity: "medium"
+    
+  # Rate Limiting
+  rate_limiting:
+    - name: "api_rate_limit"
+      match: "api.lasercalc.com/*"
+      threshold: 1000
+      period: 60
+      action: "challenge"
+      
+    - name: "calculator_rate_limit"
+      match: "lasercalc.com/calculator/*"
+      threshold: 100
+      period: 60
+      action: "block"
+      
+  # Bot Management
+  bot_management:
+    enabled: true
+    fight_mode: false
+    session_score: 1
+    verified_bots: "allow"
+    
+  # Firewall Rules
+  firewall_rules:
+    - name: "block_malicious_ips"
+      expression: "(ip.geoip.country in {\"CN\" \"RU\"}) and (http.request.uri.path contains \"admin\")"
+      action: "block"
+      
+    - name: "challenge_suspicious_requests"
+      expression: "(http.user_agent contains \"bot\") and not (cf.verified_bot_category in {\"search_engine\"})"
+      action: "challenge"
+
+# Performance Optimization
+performance:
+  # Minification
+  minification:
+    html: "on"
+    css: "on"
+    js: "on"
+    
+  # Compression
+  compression:
+    brotli: "on"
+    gzip: "on"
+    
+  # Image Optimization
+  image_optimization:
+    polish: "lossless"
+    webp: "on"
+    avif: "on"
+    
+  # Rocket Loader (async JS loading)
+  rocket_loader: "off"  # Disabled to avoid conflicts with React
+  
+  # Auto Minify
+  auto_minify:
+    html: true
+    css: true
+    js: true
+    
+  # HTTP/2 Server Push
+  http2_server_push: "on"
+  
+  # Early Hints
+  early_hints: "on"
+
+# Analytics and Monitoring
+analytics:
+  # Web Analytics
+  web_analytics:
+    enabled: true
+    
+  # Performance Insights
+  performance_insights:
+    enabled: true
+    
+  # Security Insights
+  security_insights:
+    enabled: true
+
+# Custom Rules
+custom_rules:
+  # Redirect HTTP to HTTPS
+  - name: "force_https"
+    expression: "http.request.scheme eq \"http\""
+    action: "redirect"
+    action_parameters:
+      from_scheme: "http"
+      to_scheme: "https"
+      status_code: 301
+      
+  # Redirect www to non-www
+  - name: "redirect_www"
+    expression: "http.host eq \"www.lasercalc.com\""
+    action: "redirect"
+    action_parameters:
+      from_value: "www.lasercalc.com"
+      to_value: "lasercalc.com"
+      status_code: 301
+      
+  # Block access to sensitive files
+  - name: "block_sensitive_files"
+    expression: "http.request.uri.path matches \"\\.(env|log|config|backup)$\""
+    action: "block"
+
+# Edge Functions (Cloudflare Workers)
+edge_functions:
+  # A/B Testing
+  - name: "ab_testing"
+    script: |
+      addEventListener('fetch', event => {
+        event.respondWith(handleRequest(event.request))
+      })
+      
+      async function handleRequest(request) {
+        const url = new URL(request.url)
+        
+        // Simple A/B test for calculator pages
+        if (url.pathname.startsWith('/calculator/')) {
+          const variant = Math.random() < 0.5 ? 'A' : 'B'
+          const response = await fetch(request)
+          
+          // Add variant header
+          const newResponse = new Response(response.body, response)
+          newResponse.headers.set('X-AB-Variant', variant)
+          
+          return newResponse
+        }
+        
+        return fetch(request)
+      }
+      
+  # Security Headers
+  - name: "security_headers"
+    script: |
+      addEventListener('fetch', event => {
+        event.respondWith(addSecurityHeaders(event.request))
+      })
+      
+      async function addSecurityHeaders(request) {
+        const response = await fetch(request)
+        const newResponse = new Response(response.body, response)
+        
+        // Add additional security headers
+        newResponse.headers.set('X-Content-Type-Options', 'nosniff')
+        newResponse.headers.set('X-Frame-Options', 'DENY')
+        newResponse.headers.set('X-XSS-Protection', '1; mode=block')
+        newResponse.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
+        
+        return newResponse
+      }
+
+# Load Balancing
+load_balancing:
+  pools:
+    - name: "primary_pool"
+      origins:
+        - name: "server1"
+          address: "192.168.1.10"
+          weight: 1
+          enabled: true
+          
+        - name: "server2"
+          address: "192.168.1.11"
+          weight: 1
+          enabled: true
+          
+    - name: "backup_pool"
+      origins:
+        - name: "backup_server"
+          address: "192.168.1.20"
+          weight: 1
+          enabled: true
+          
+  monitors:
+    - name: "http_monitor"
+      type: "http"
+      method: "GET"
+      path: "/health"
+      expected_codes: "200"
+      interval: 60
+      retries: 2
+      timeout: 5
+      
+  load_balancers:
+    - name: "main_lb"
+      default_pools: ["primary_pool"]
+      fallback_pool: "backup_pool"
+      session_affinity: "none"
+      steering_policy: "dynamic_latency"
+
+# Caching Configuration
+caching:
+  # Cache Rules
+  cache_rules:
+    - name: "static_assets"
+      expression: "http.request.uri.path matches \"\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot)$\""
+      action: "cache"
+      cache_key:
+        ignore_query_strings: false
+        custom_key:
+          query_string:
+            include: ["v", "version"]
+      edge_ttl: 31536000  # 1 year
+      browser_ttl: 31536000  # 1 year
+      
+    - name: "api_responses"
+      expression: "http.request.uri.path starts_with \"/api/\""
+      action: "bypass"
+      
+    - name: "calculator_pages"
+      expression: "http.request.uri.path starts_with \"/calculator/\""
+      action: "cache"
+      edge_ttl: 7200  # 2 hours
+      browser_ttl: 3600  # 1 hour
+
+# Origin Configuration
+origin:
+  # Origin Server Settings
+  servers:
+    - name: "primary"
+      hostname: "origin.lasercalc.com"
+      port: 443
+      protocol: "https"
+      
+  # Origin Rules
+  origin_rules:
+    - name: "api_origin"
+      expression: "http.request.uri.path starts_with \"/api/\""
+      action: "route"
+      action_parameters:
+        host_header: "api.lasercalc.com"
+        origin: "api-server.internal"
+
+# Monitoring and Alerts
+monitoring:
+  # Health Checks
+  health_checks:
+    - name: "main_site"
+      type: "HTTPS"
+      zone: "lasercalc.com"
+      path: "/health"
+      interval: 60
+      retries: 2
+      timeout: 5
+      expected_codes: "200"
+      
+  # Alerts
+  alerts:
+    - name: "high_error_rate"
+      alert_type: "http_requests_total"
+      threshold: 100
+      comparison: "greater_than"
+      evaluation_period: 300
+      
+    - name: "origin_down"
+      alert_type: "origin_error"
+      threshold: 1
+      comparison: "greater_than"
+      evaluation_period: 60

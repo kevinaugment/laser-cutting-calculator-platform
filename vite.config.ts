@@ -1,6 +1,10 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
+import { splitVendorChunkPlugin } from 'vite'
+import { visualizer } from 'rollup-plugin-visualizer'
+import { compression } from 'vite-plugin-compression'
+import { createHtmlPlugin } from 'vite-plugin-html'
 /// <reference types="vitest" />
 
 // https://vite.dev/config/
@@ -9,7 +13,66 @@ export default defineConfig(({ mode }) => {
   loadEnv(mode, process.cwd(), '')
 
   return {
-    plugins: [react()],
+    plugins: [
+      react({
+        // Enable React Fast Refresh for better development experience
+        fastRefresh: mode === 'development',
+        // Enable JSX runtime optimization
+        jsxRuntime: 'automatic',
+      }),
+
+      // Split vendor chunks for better caching
+      splitVendorChunkPlugin(),
+
+      // Gzip compression
+      compression({
+        algorithm: 'gzip',
+        ext: '.gz',
+        threshold: 1024,
+        deleteOriginFile: false,
+      }),
+
+      // Brotli compression for better compression ratio
+      compression({
+        algorithm: 'brotliCompress',
+        ext: '.br',
+        threshold: 1024,
+        deleteOriginFile: false,
+      }),
+
+      // HTML optimization
+      createHtmlPlugin({
+        minify: mode === 'production' ? {
+          collapseWhitespace: true,
+          keepClosingSlash: true,
+          removeComments: true,
+          removeRedundantAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          useShortDoctype: true,
+          minifyCSS: true,
+          minifyJS: true,
+        } : false,
+        inject: {
+          data: {
+            title: 'Laser Cutting Calculator',
+            description: 'Professional laser cutting calculator platform with advanced optimization tools',
+            keywords: 'laser cutting, calculator, manufacturing, optimization',
+          },
+        },
+      }),
+
+      // Bundle analyzer (only in production)
+      ...(mode === 'production' ? [
+        visualizer({
+          filename: 'dist/stats.html',
+          open: false,
+          gzipSize: true,
+          brotliSize: true,
+          template: 'treemap',
+        }),
+      ] : []),
+    ],
 
     // Path resolution
     resolve: {
