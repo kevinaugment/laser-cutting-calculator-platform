@@ -1,0 +1,66 @@
+{
+  "metaTags": {
+    "score": 100,
+    "issues": [],
+    "passed": [
+      "Found 4 SEO components"
+    ]
+  },
+  "structuredData": {
+    "score": 100,
+    "issues": [],
+    "passed": [
+      "Found WebApplication schema",
+      "Found Organization schema",
+      "Found WebSite schema",
+      "Found BreadcrumbList schema",
+      "Found Product schema",
+      "Found SoftwareApplication schema",
+      "Found CollectionPage schema",
+      "Schema.org context found"
+    ]
+  },
+  "performance": {
+    "score": 75,
+    "issues": [],
+    "passed": [
+      "minify optimization enabled",
+      "sourcemap optimization enabled",
+      "rollupOptions optimization enabled",
+      "manualChunks optimization enabled",
+      "terserOptions optimization enabled",
+      "compression optimization enabled"
+    ]
+  },
+  "mobile": {
+    "score": 40,
+    "issues": [
+      "Missing mobile-web-app-capable meta tag",
+      "Missing apple-mobile-web-app meta tag",
+      "Missing theme-color meta tag"
+    ],
+    "passed": [
+      "viewport meta tag found",
+      "width=device-width meta tag found"
+    ]
+  },
+  "google2025": {
+    "score": 88,
+    "issues": [
+      "Missing mobile-first implementation"
+    ],
+    "passed": [
+      "Google 2025 SEO component found",
+      "E-A-T implementation found",
+      "Core Web Vitals implementation found",
+      "max-snippet:-1 implementation found",
+      "max-image-preview:large implementation found",
+      "expertise-level implementation found",
+      "content-type implementation found"
+    ]
+  },
+  "overall": {
+    "score": 81,
+    "grade": "B"
+  }
+}

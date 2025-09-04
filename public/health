@@ -1,0 +1,14 @@
+{
+  "status": "healthy",
+  "timestamp": "2025-09-04T06:50:00.000Z",
+  "version": "1.0.0",
+  "uptime": 0,
+  "service": "laser-cutting-calculator-platform",
+  "environment": "production",
+  "checks": {
+    "basic": {
+      "status": "pass",
+      "message": "Basic health check endpoint available"
+    }
+  }
+}

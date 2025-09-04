@@ -20,7 +20,7 @@ import {
   Close as CloseIcon,
   ArrowBack as ArrowBackIcon,
   ArrowForward as ArrowForwardIcon,
-  Skip as SkipIcon,
+  SkipNext as SkipIcon,
   PlayArrow as PlayIcon,
   Pause as PauseIcon,
 } from '@mui/icons-material';

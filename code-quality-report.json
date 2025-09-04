@@ -1,0 +1,24 @@
+{
+  "typescript": {
+    "passed": true,
+    "errors": 0,
+    "warnings": 0
+  },
+  "eslint": {
+    "passed": false,
+    "errors": 0,
+    "warnings": 0
+  },
+  "security": {
+    "passed": true,
+    "vulnerabilities": 0
+  },
+  "tests": {
+    "passed": false,
+    "coverage": 0
+  },
+  "overall": {
+    "passed": false,
+    "score": 65
+  }
+}
