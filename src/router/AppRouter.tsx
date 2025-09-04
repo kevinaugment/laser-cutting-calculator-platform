@@ -9,6 +9,7 @@ import EpicHubPage from '../pages/EpicHubPage';
 import CalculatorsPage from '../pages/CalculatorsPage';
 import ContactPage from '../pages/ContactPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import HealthCheck from '../components/HealthCheck';
 import { preloadCoreCalculators, createLazyCalculatorRoutes } from './LazyCalculatorRoutes';
 
 const AppRouter: React.FC = () => {
@@ -37,6 +38,9 @@ const AppRouter: React.FC = () => {
 
           {/* Contact Page */}
           <Route path="/contact" element={<ContactPage />} />
+
+          {/* Health Check Page */}
+          <Route path="/health" element={<HealthCheck />} />
 
           {/* Calculator Pages - Lazy Loaded */}
           {createLazyCalculatorRoutes()}
