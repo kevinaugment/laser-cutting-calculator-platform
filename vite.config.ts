@@ -1,9 +1,9 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import { resolve } from 'path'
-import { splitVendorChunkPlugin } from 'vite'
+// import { splitVendorChunkPlugin } from 'vite' // Not available in this version
 import { visualizer } from 'rollup-plugin-visualizer'
-import { compression } from 'vite-plugin-compression'
+import viteCompression from 'vite-plugin-compression'
 import { createHtmlPlugin } from 'vite-plugin-html'
 /// <reference types="vitest" />
 
@@ -21,11 +21,10 @@ export default defineConfig(({ mode }) => {
         jsxRuntime: 'automatic',
       }),
 
-      // Split vendor chunks for better caching
-      splitVendorChunkPlugin(),
+      // Split vendor chunks for better caching (handled by manual chunks below)
 
       // Gzip compression
-      compression({
+      viteCompression({
         algorithm: 'gzip',
         ext: '.gz',
         threshold: 1024,
@@ -33,7 +32,7 @@ export default defineConfig(({ mode }) => {
       }),
 
       // Brotli compression for better compression ratio
-      compression({
+      viteCompression({
         algorithm: 'brotliCompress',
         ext: '.br',
         threshold: 1024,

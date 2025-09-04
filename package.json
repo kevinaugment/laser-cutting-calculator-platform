@@ -16,9 +16,6 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
-    "deploy:staging": "./scripts/deploy.sh staging",
-    "deploy:production": "./scripts/deploy.sh production",
-    "deploy:rollback": "./scripts/deploy.sh rollback",
     "test:deployment": "./scripts/test-deployment.sh",
     "test:smoke": "./scripts/test-deployment.sh staging smoke",
     "backup": "./scripts/backup.sh backup",
@@ -31,6 +28,7 @@
     "clean": "rm -rf dist",
     "deploy:staging": "npm run build:staging && vercel --prod",
     "deploy:production": "npm run build:production && vercel --prod",
+    "deploy:rollback": "./scripts/deploy.sh rollback",
     "deploy:cloudflare": "node deploy-cloudflare.js",
     "deploy:cf": "npm run build && npx wrangler pages deploy dist --project-name=laser-calc-app",
     "lighthouse": "lighthouse http://localhost:4173 --output=json --output-path=./lighthouse-report.json",
@@ -86,6 +84,7 @@
     "jsdom": "^26.1.0",
     "postcss": "^8.5.6",
     "prettier": "^3.6.2",
+    "rollup-plugin-visualizer": "^6.0.3",
     "tailwindcss": "^3.4.17",
     "terser": "^5.43.1",
     "ts-jest": "^29.4.1",
@@ -93,6 +92,8 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.39.1",
     "vite": "^7.1.2",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-html": "^3.2.2",
     "vitest": "^3.2.4"
   }
 }
