@@ -1,0 +1,426 @@
+# Backup and Disaster Recovery Monitoring Configuration
+# Comprehensive monitoring for backup systems and disaster recovery procedures
+
+# Prometheus Rules for Backup Monitoring
+groups:
+  - name: backup.rules
+    rules:
+      # Backup Success Rate
+      - alert: BackupFailureRate
+        expr: (rate(backup_failures_total[24h]) / rate(backup_attempts_total[24h])) > 0.05
+        for: 5m
+        labels:
+          severity: critical
+          service: backup
+          category: reliability
+        annotations:
+          summary: "High backup failure rate detected"
+          description: "Backup failure rate is {{ $value | humanizePercentage }} over the last 24 hours"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-failures"
+          
+      # Backup Not Running
+      - alert: BackupNotRunning
+        expr: time() - backup_last_success_timestamp > 86400
+        for: 10m
+        labels:
+          severity: critical
+          service: backup
+          category: availability
+        annotations:
+          summary: "Backup has not run successfully in 24 hours"
+          description: "Last successful backup was {{ $value | humanizeDuration }} ago"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-not-running"
+          
+      # Backup Size Anomaly
+      - alert: BackupSizeAnomaly
+        expr: |
+          (
+            backup_size_bytes - 
+            avg_over_time(backup_size_bytes[7d])
+          ) / avg_over_time(backup_size_bytes[7d]) > 0.5
+        for: 15m
+        labels:
+          severity: warning
+          service: backup
+          category: data-integrity
+        annotations:
+          summary: "Backup size significantly different from average"
+          description: "Current backup size is {{ $value | humanizePercentage }} different from 7-day average"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-size-anomaly"
+          
+      # Backup Duration Too Long
+      - alert: BackupDurationHigh
+        expr: backup_duration_seconds > 3600
+        for: 5m
+        labels:
+          severity: warning
+          service: backup
+          category: performance
+        annotations:
+          summary: "Backup taking longer than expected"
+          description: "Backup duration is {{ $value | humanizeDuration }}, exceeding 1 hour threshold"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-duration-high"
+          
+      # Storage Space Low
+      - alert: BackupStorageLow
+        expr: (backup_storage_used_bytes / backup_storage_total_bytes) > 0.85
+        for: 10m
+        labels:
+          severity: warning
+          service: backup
+          category: capacity
+        annotations:
+          summary: "Backup storage space running low"
+          description: "Backup storage is {{ $value | humanizePercentage }} full"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-storage-low"
+          
+      # Critical Storage Space
+      - alert: BackupStorageCritical
+        expr: (backup_storage_used_bytes / backup_storage_total_bytes) > 0.95
+        for: 5m
+        labels:
+          severity: critical
+          service: backup
+          category: capacity
+        annotations:
+          summary: "Backup storage space critically low"
+          description: "Backup storage is {{ $value | humanizePercentage }} full"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-storage-critical"
+
+  - name: disaster-recovery.rules
+    rules:
+      # DR Test Overdue
+      - alert: DRTestOverdue
+        expr: time() - dr_test_last_success_timestamp > 2592000  # 30 days
+        for: 1h
+        labels:
+          severity: warning
+          service: disaster-recovery
+          category: compliance
+        annotations:
+          summary: "Disaster recovery test is overdue"
+          description: "Last successful DR test was {{ $value | humanizeDuration }} ago"
+          runbook_url: "https://docs.lasercalc.com/runbooks/dr-test-overdue"
+          
+      # RTO Violation
+      - alert: RTOViolation
+        expr: disaster_recovery_duration_seconds > 7200  # 2 hours
+        for: 0m
+        labels:
+          severity: critical
+          service: disaster-recovery
+          category: sla-violation
+        annotations:
+          summary: "Recovery Time Objective (RTO) violated"
+          description: "Disaster recovery took {{ $value | humanizeDuration }}, exceeding 2-hour RTO"
+          runbook_url: "https://docs.lasercalc.com/runbooks/rto-violation"
+          
+      # RPO Violation
+      - alert: RPOViolation
+        expr: data_loss_seconds > 300  # 5 minutes
+        for: 0m
+        labels:
+          severity: critical
+          service: disaster-recovery
+          category: sla-violation
+        annotations:
+          summary: "Recovery Point Objective (RPO) violated"
+          description: "Data loss of {{ $value | humanizeDuration }} exceeds 5-minute RPO"
+          runbook_url: "https://docs.lasercalc.com/runbooks/rpo-violation"
+          
+      # Replication Lag High
+      - alert: ReplicationLagHigh
+        expr: database_replication_lag_seconds > 60
+        for: 5m
+        labels:
+          severity: warning
+          service: disaster-recovery
+          category: data-integrity
+        annotations:
+          summary: "Database replication lag is high"
+          description: "Replication lag is {{ $value | humanizeDuration }}"
+          runbook_url: "https://docs.lasercalc.com/runbooks/replication-lag-high"
+          
+      # Secondary Site Unavailable
+      - alert: SecondarySiteDown
+        expr: up{job="secondary-site"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: disaster-recovery
+          category: availability
+        annotations:
+          summary: "Secondary disaster recovery site is unavailable"
+          description: "Secondary site has been down for {{ $value | humanizeDuration }}"
+          runbook_url: "https://docs.lasercalc.com/runbooks/secondary-site-down"
+
+  - name: backup-validation.rules
+    rules:
+      # Backup Validation Failed
+      - alert: BackupValidationFailed
+        expr: backup_validation_success == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: backup
+          category: data-integrity
+        annotations:
+          summary: "Backup validation failed"
+          description: "Backup validation has failed for backup {{ $labels.backup_name }}"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-validation-failed"
+          
+      # Backup Restore Test Failed
+      - alert: BackupRestoreTestFailed
+        expr: backup_restore_test_success == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: backup
+          category: recoverability
+        annotations:
+          summary: "Backup restore test failed"
+          description: "Backup restore test failed for backup {{ $labels.backup_name }}"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-restore-test-failed"
+          
+      # Backup Integrity Check Failed
+      - alert: BackupIntegrityCheckFailed
+        expr: backup_integrity_check_success == 0
+        for: 5m
+        labels:
+          severity: critical
+          service: backup
+          category: data-integrity
+        annotations:
+          summary: "Backup integrity check failed"
+          description: "Integrity check failed for backup {{ $labels.backup_name }}"
+          runbook_url: "https://docs.lasercalc.com/runbooks/backup-integrity-failed"
+
+  - name: business-continuity.rules
+    rules:
+      # Service Availability Below SLA
+      - alert: ServiceAvailabilityBelowSLA
+        expr: (avg_over_time(up[24h])) < 0.999
+        for: 5m
+        labels:
+          severity: warning
+          service: business-continuity
+          category: sla-violation
+        annotations:
+          summary: "Service availability below SLA"
+          description: "24-hour availability is {{ $value | humanizePercentage }}, below 99.9% SLA"
+          runbook_url: "https://docs.lasercalc.com/runbooks/availability-below-sla"
+          
+      # Incident Response Time High
+      - alert: IncidentResponseTimeHigh
+        expr: incident_response_time_seconds > 900  # 15 minutes
+        for: 0m
+        labels:
+          severity: warning
+          service: business-continuity
+          category: response-time
+        annotations:
+          summary: "Incident response time exceeded target"
+          description: "Incident response took {{ $value | humanizeDuration }}, exceeding 15-minute target"
+          runbook_url: "https://docs.lasercalc.com/runbooks/incident-response-time-high"
+          
+      # Communication System Down
+      - alert: CommunicationSystemDown
+        expr: up{job="communication-system"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: business-continuity
+          category: communication
+        annotations:
+          summary: "Communication system is down"
+          description: "Critical communication system has been unavailable for {{ $value | humanizeDuration }}"
+          runbook_url: "https://docs.lasercalc.com/runbooks/communication-system-down"
+
+# Grafana Dashboard Configuration
+dashboards:
+  - name: "Backup & Disaster Recovery"
+    panels:
+      - title: "Backup Success Rate"
+        type: "stat"
+        targets:
+          - expr: "rate(backup_success_total[24h]) / rate(backup_attempts_total[24h])"
+        thresholds:
+          - color: "red"
+            value: 0.95
+          - color: "yellow"
+            value: 0.98
+          - color: "green"
+            value: 0.99
+            
+      - title: "Backup Duration"
+        type: "timeseries"
+        targets:
+          - expr: "backup_duration_seconds"
+        unit: "seconds"
+        
+      - title: "Backup Size Trend"
+        type: "timeseries"
+        targets:
+          - expr: "backup_size_bytes"
+        unit: "bytes"
+        
+      - title: "Storage Utilization"
+        type: "gauge"
+        targets:
+          - expr: "backup_storage_used_bytes / backup_storage_total_bytes * 100"
+        unit: "percent"
+        max: 100
+        
+      - title: "Replication Lag"
+        type: "timeseries"
+        targets:
+          - expr: "database_replication_lag_seconds"
+        unit: "seconds"
+        
+      - title: "DR Test Results"
+        type: "table"
+        targets:
+          - expr: "dr_test_success"
+          - expr: "dr_test_duration_seconds"
+          - expr: "dr_test_rto_seconds"
+          - expr: "dr_test_rpo_seconds"
+
+# AlertManager Configuration
+alertmanager:
+  route:
+    group_by: ['alertname', 'service', 'severity']
+    group_wait: 10s
+    group_interval: 10s
+    repeat_interval: 12h
+    receiver: 'default-receiver'
+    routes:
+      # Critical backup alerts
+      - match:
+          service: backup
+          severity: critical
+        receiver: 'backup-critical'
+        group_wait: 0s
+        repeat_interval: 1h
+        
+      # DR alerts
+      - match:
+          service: disaster-recovery
+        receiver: 'disaster-recovery-team'
+        group_wait: 0s
+        repeat_interval: 30m
+        
+      # Business continuity alerts
+      - match:
+          service: business-continuity
+        receiver: 'business-continuity-team'
+        
+  receivers:
+    - name: 'default-receiver'
+      email_configs:
+        - to: 'ops@lasercalc.com'
+          subject: '[Backup/DR] {{ .GroupLabels.alertname }}'
+          
+    - name: 'backup-critical'
+      email_configs:
+        - to: 'backup-team@lasercalc.com'
+          subject: '[CRITICAL] Backup System Alert'
+      slack_configs:
+        - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+          channel: '#backup-alerts'
+          title: '🚨 Critical Backup Alert'
+      pagerduty_configs:
+        - routing_key: 'YOUR_PAGERDUTY_KEY'
+          
+    - name: 'disaster-recovery-team'
+      email_configs:
+        - to: 'dr-team@lasercalc.com'
+          subject: '[DR] Disaster Recovery Alert'
+      slack_configs:
+        - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+          channel: '#disaster-recovery'
+          title: '⚠️ Disaster Recovery Alert'
+          
+    - name: 'business-continuity-team'
+      email_configs:
+        - to: 'bcp-team@lasercalc.com'
+          subject: '[BCP] Business Continuity Alert'
+      slack_configs:
+        - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+          channel: '#business-continuity'
+          title: '📋 Business Continuity Alert'
+
+# Backup Metrics Collection
+backup_metrics:
+  - name: "backup_attempts_total"
+    type: "counter"
+    help: "Total number of backup attempts"
+    labels: ["backup_type", "destination"]
+    
+  - name: "backup_success_total"
+    type: "counter"
+    help: "Total number of successful backups"
+    labels: ["backup_type", "destination"]
+    
+  - name: "backup_failures_total"
+    type: "counter"
+    help: "Total number of failed backups"
+    labels: ["backup_type", "destination", "error_type"]
+    
+  - name: "backup_duration_seconds"
+    type: "histogram"
+    help: "Backup duration in seconds"
+    labels: ["backup_type", "destination"]
+    buckets: [60, 300, 600, 1800, 3600, 7200]
+    
+  - name: "backup_size_bytes"
+    type: "gauge"
+    help: "Backup size in bytes"
+    labels: ["backup_type", "destination"]
+    
+  - name: "backup_last_success_timestamp"
+    type: "gauge"
+    help: "Timestamp of last successful backup"
+    labels: ["backup_type", "destination"]
+    
+  - name: "backup_storage_used_bytes"
+    type: "gauge"
+    help: "Used backup storage in bytes"
+    labels: ["destination"]
+    
+  - name: "backup_storage_total_bytes"
+    type: "gauge"
+    help: "Total backup storage in bytes"
+    labels: ["destination"]
+
+# Disaster Recovery Metrics
+dr_metrics:
+  - name: "dr_test_success"
+    type: "gauge"
+    help: "Success status of last DR test (1=success, 0=failure)"
+    labels: ["test_type", "environment"]
+    
+  - name: "dr_test_duration_seconds"
+    type: "gauge"
+    help: "Duration of last DR test in seconds"
+    labels: ["test_type", "environment"]
+    
+  - name: "dr_test_last_success_timestamp"
+    type: "gauge"
+    help: "Timestamp of last successful DR test"
+    labels: ["test_type", "environment"]
+    
+  - name: "disaster_recovery_duration_seconds"
+    type: "histogram"
+    help: "Actual disaster recovery duration in seconds"
+    labels: ["incident_type", "recovery_type"]
+    buckets: [300, 900, 1800, 3600, 7200, 14400]
+    
+  - name: "data_loss_seconds"
+    type: "gauge"
+    help: "Data loss in seconds during recovery"
+    labels: ["incident_type"]
+    
+  - name: "database_replication_lag_seconds"
+    type: "gauge"
+    help: "Database replication lag in seconds"
+    labels: ["source", "destination"]
