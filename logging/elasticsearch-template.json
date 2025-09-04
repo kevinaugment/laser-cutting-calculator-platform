@@ -1,0 +1,188 @@
+{
+  "index_patterns": ["laser-calc-*"],
+  "template": {
+    "settings": {
+      "number_of_shards": 1,
+      "number_of_replicas": 1,
+      "index.refresh_interval": "30s",
+      "index.codec": "best_compression",
+      "index.lifecycle.name": "laser-calc-policy",
+      "index.lifecycle.rollover_alias": "laser-calc-logs"
+    },
+    "mappings": {
+      "properties": {
+        "@timestamp": {
+          "type": "date"
+        },
+        "timestamp": {
+          "type": "date"
+        },
+        "level": {
+          "type": "keyword",
+          "fields": {
+            "text": {
+              "type": "text"
+            }
+          }
+        },
+        "severity": {
+          "type": "keyword"
+        },
+        "message": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "service": {
+          "type": "keyword"
+        },
+        "environment": {
+          "type": "keyword"
+        },
+        "calculator_type": {
+          "type": "keyword"
+        },
+        "user_id": {
+          "type": "keyword"
+        },
+        "session_id": {
+          "type": "keyword"
+        },
+        "request_id": {
+          "type": "keyword"
+        },
+        "container_name": {
+          "type": "keyword"
+        },
+        "container_image": {
+          "type": "keyword"
+        },
+        "clientip": {
+          "type": "ip"
+        },
+        "request": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "response": {
+          "type": "integer"
+        },
+        "status_category": {
+          "type": "keyword"
+        },
+        "request_time": {
+          "type": "float"
+        },
+        "bytes": {
+          "type": "long"
+        },
+        "referer": {
+          "type": "keyword",
+          "ignore_above": 256
+        },
+        "agent": {
+          "type": "text",
+          "fields": {
+            "keyword": {
+              "type": "keyword",
+              "ignore_above": 256
+            }
+          }
+        },
+        "geoip": {
+          "properties": {
+            "location": {
+              "type": "geo_point"
+            },
+            "country_name": {
+              "type": "keyword"
+            },
+            "city_name": {
+              "type": "keyword"
+            },
+            "region_name": {
+              "type": "keyword"
+            }
+          }
+        },
+        "error": {
+          "properties": {
+            "type": {
+              "type": "keyword"
+            },
+            "message": {
+              "type": "text"
+            },
+            "stack": {
+              "type": "text"
+            }
+          }
+        },
+        "performance": {
+          "properties": {
+            "duration": {
+              "type": "float"
+            },
+            "memory_usage": {
+              "type": "long"
+            },
+            "cpu_usage": {
+              "type": "float"
+            }
+          }
+        },
+        "business": {
+          "properties": {
+            "calculation_result": {
+              "type": "object"
+            },
+            "input_parameters": {
+              "type": "object"
+            },
+            "feature_used": {
+              "type": "keyword"
+            }
+          }
+        },
+        "security": {
+          "properties": {
+            "event_type": {
+              "type": "keyword"
+            },
+            "threat_level": {
+              "type": "keyword"
+            },
+            "source_ip": {
+              "type": "ip"
+            },
+            "user_agent": {
+              "type": "text"
+            }
+          }
+        },
+        "tags": {
+          "type": "keyword"
+        },
+        "parse_error": {
+          "type": "keyword"
+        }
+      }
+    }
+  },
+  "composed_of": [],
+  "priority": 100,
+  "version": 1,
+  "_meta": {
+    "description": "Template for Laser Calc application logs",
+    "created_by": "laser-calc-monitoring-system"
+  }
+}

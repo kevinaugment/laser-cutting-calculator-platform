@@ -1,0 +1,217 @@
+global:
+  smtp_smarthost: 'localhost:587'
+  smtp_from: 'alerts@lasercalc.com'
+  smtp_auth_username: 'alerts@lasercalc.com'
+  smtp_auth_password: 'your-email-password'
+
+# Templates for alert notifications
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# Route tree for alert routing
+route:
+  group_by: ['alertname', 'cluster', 'service']
+  group_wait: 10s
+  group_interval: 10s
+  repeat_interval: 1h
+  receiver: 'default-receiver'
+  routes:
+    # Critical alerts - immediate notification
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      group_wait: 0s
+      repeat_interval: 5m
+      routes:
+        # Database issues
+        - match:
+            alertname: DatabaseDown
+          receiver: 'database-team'
+        # Application down
+        - match:
+            alertname: ApplicationDown
+          receiver: 'oncall-team'
+        # High error rate
+        - match:
+            alertname: HighErrorRate
+          receiver: 'development-team'
+
+    # Warning alerts - monitor closely
+    - match:
+        severity: warning
+      receiver: 'warning-alerts'
+      group_wait: 30s
+      repeat_interval: 30m
+      routes:
+        # Performance issues
+        - match_re:
+            alertname: '(HighResponseTime|HighCPUUsage|HighMemoryUsage)'
+          receiver: 'performance-team'
+        # Capacity issues
+        - match_re:
+            alertname: '(DiskSpaceHigh|DatabaseConnectionsHigh)'
+          receiver: 'infrastructure-team'
+
+    # Info alerts - awareness only
+    - match:
+        severity: info
+      receiver: 'info-alerts'
+      group_wait: 5m
+      repeat_interval: 24h
+
+# Inhibition rules to prevent alert spam
+inhibit_rules:
+  # Inhibit warning alerts when critical alerts are firing
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'cluster', 'service']
+
+  # Inhibit individual service alerts when entire cluster is down
+  - source_match:
+      alertname: 'ClusterDown'
+    target_match_re:
+      alertname: '(ServiceDown|DatabaseDown|CacheDown)'
+    equal: ['cluster']
+
+# Receivers define notification channels
+receivers:
+  # Default receiver
+  - name: 'default-receiver'
+    email_configs:
+      - to: 'team@lasercalc.com'
+        subject: '[Laser Calc] Alert: {{ .GroupLabels.alertname }}'
+        body: |
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Labels: {{ range .Labels.SortedPairs }}{{ .Name }}={{ .Value }} {{ end }}
+          {{ end }}
+
+  # Critical alerts - multiple channels
+  - name: 'critical-alerts'
+    email_configs:
+      - to: 'oncall@lasercalc.com'
+        subject: '[CRITICAL] Laser Calc Alert: {{ .GroupLabels.alertname }}'
+        body: |
+          🚨 CRITICAL ALERT 🚨
+          
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Severity: {{ .Labels.severity }}
+          Service: {{ .Labels.service }}
+          Time: {{ .StartsAt }}
+          
+          Labels: {{ range .Labels.SortedPairs }}{{ .Name }}={{ .Value }} {{ end }}
+          {{ end }}
+          
+          Please investigate immediately!
+    slack_configs:
+      - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+        channel: '#alerts-critical'
+        title: '🚨 Critical Alert: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          *Alert:* {{ .Annotations.summary }}
+          *Description:* {{ .Annotations.description }}
+          *Severity:* {{ .Labels.severity }}
+          *Service:* {{ .Labels.service }}
+          {{ end }}
+        send_resolved: true
+    # PagerDuty integration for critical alerts
+    pagerduty_configs:
+      - routing_key: 'YOUR_PAGERDUTY_INTEGRATION_KEY'
+        description: '{{ .GroupLabels.alertname }}: {{ .GroupLabels.instance }}'
+
+  # Warning alerts
+  - name: 'warning-alerts'
+    email_configs:
+      - to: 'team@lasercalc.com'
+        subject: '[WARNING] Laser Calc Alert: {{ .GroupLabels.alertname }}'
+        body: |
+          ⚠️ WARNING ALERT ⚠️
+          
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Severity: {{ .Labels.severity }}
+          Service: {{ .Labels.service }}
+          Time: {{ .StartsAt }}
+          {{ end }}
+    slack_configs:
+      - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+        channel: '#alerts-warning'
+        title: '⚠️ Warning: {{ .GroupLabels.alertname }}'
+        text: |
+          {{ range .Alerts }}
+          *Alert:* {{ .Annotations.summary }}
+          *Description:* {{ .Annotations.description }}
+          *Service:* {{ .Labels.service }}
+          {{ end }}
+        send_resolved: true
+
+  # Info alerts
+  - name: 'info-alerts'
+    email_configs:
+      - to: 'team@lasercalc.com'
+        subject: '[INFO] Laser Calc: {{ .GroupLabels.alertname }}'
+        body: |
+          ℹ️ INFO ALERT ℹ️
+          
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Time: {{ .StartsAt }}
+          {{ end }}
+
+  # Team-specific receivers
+  - name: 'database-team'
+    email_configs:
+      - to: 'dba@lasercalc.com'
+        subject: '[DB CRITICAL] {{ .GroupLabels.alertname }}'
+        body: |
+          🗄️ DATABASE CRITICAL ALERT 🗄️
+          
+          {{ range .Alerts }}
+          Alert: {{ .Annotations.summary }}
+          Description: {{ .Annotations.description }}
+          Database: {{ .Labels.database }}
+          Instance: {{ .Labels.instance }}
+          {{ end }}
+    slack_configs:
+      - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+        channel: '#database-alerts'
+        title: '🗄️ Database Critical: {{ .GroupLabels.alertname }}'
+
+  - name: 'oncall-team'
+    email_configs:
+      - to: 'oncall@lasercalc.com'
+        subject: '[ONCALL] {{ .GroupLabels.alertname }}'
+    pagerduty_configs:
+      - routing_key: 'YOUR_ONCALL_PAGERDUTY_KEY'
+
+  - name: 'development-team'
+    email_configs:
+      - to: 'dev@lasercalc.com'
+        subject: '[DEV] {{ .GroupLabels.alertname }}'
+    slack_configs:
+      - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+        channel: '#development-alerts'
+
+  - name: 'performance-team'
+    email_configs:
+      - to: 'performance@lasercalc.com'
+        subject: '[PERFORMANCE] {{ .GroupLabels.alertname }}'
+    slack_configs:
+      - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+        channel: '#performance-alerts'
+
+  - name: 'infrastructure-team'
+    email_configs:
+      - to: 'infra@lasercalc.com'
+        subject: '[INFRA] {{ .GroupLabels.alertname }}'
+    slack_configs:
+      - api_url: 'YOUR_SLACK_WEBHOOK_URL'
+        channel: '#infrastructure-alerts'
